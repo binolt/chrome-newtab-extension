@@ -8,7 +8,7 @@ import {ReactComponent as ImageIcon} from "../icons/settings/image-black-48dp.sv
 import {ReactComponent as TodoIcon} from "../icons/settings/layers-black-48dp.svg"
 import {ReactComponent as ToggleIcon} from "../icons/settings/toggle_on-black-48dp.svg"
 import {ReactComponent as QuotesIcon} from "../icons/settings/wb_twilight-black-48dp.svg"
-// import {ReactComponent as ChevronLeft} from "../icons/settings/chevron_left-black-48dp.svg"
+import {ReactComponent as ChevronLeft} from "../icons/settings/chevron_left-black-48dp.svg"
 // import {ReactComponent as Heart} from "../icons/settings/heart.svg"
 
 
@@ -26,6 +26,7 @@ const Menu = (props) => {
     }, [])
 
     const updateMenu = (targetMenu) => {
+        console.log(targetMenu)
         setCurrentMenu(targetMenu)
     }
 
@@ -34,8 +35,17 @@ const Menu = (props) => {
             <CSSTransition in={currentMenu === "main"} unmountOnExit>
                 <MainMenu updateMenu={updateMenu}/>
             </CSSTransition>
-            <CSSTransition in={currentMenu === "background"} unmountOnExit>
-                <BackgroundMenu updateMenu={updateMenu} changeImage={props.changeImage}/>
+            <CSSTransition in={currentMenu === "Background"} unmountOnExit>
+                <SideMenu updateMenu={updateMenu} title="Background"/>
+            </CSSTransition>
+            <CSSTransition in={currentMenu === "Profile"} unmountOnExit>
+                <SideMenu updateMenu={updateMenu} title="Profile"/>
+            </CSSTransition>
+            <CSSTransition in={currentMenu === "Quotes"} unmountOnExit>
+                <SideMenu updateMenu={updateMenu} title="Quotes"/>
+            </CSSTransition>
+            <CSSTransition in={currentMenu === "Todo List"} unmountOnExit>
+                <SideMenu updateMenu={updateMenu} title="Todo List"/>
             </CSSTransition>
         </div>  
      );
@@ -50,12 +60,23 @@ const MainMenu = (props) => {
                 <h1>Settings</h1>
             </section>
             <hr/>
-            <MenuItem icon={<ProfileIcon/>} title="Profile" desc="Edit your profile"/>
-            <MenuItem icon={<ImageIcon/>} title="Background" desc="Set your own custom background"/>
-            <MenuItem icon={<QuotesIcon/>} title="Quotes" desc="Spark creativity and passion with uplifing quotes!"/>
-            <MenuItem icon={<TodoIcon/>} title="Todo List" desc="Keep on top of your daily tasks"/>
-            <MenuItem icon={<DarkmodeIcon/>} toggle title="Dark Mode" desc="For the lightmode weirdos out there :)"/>
-            <section className="menu-footer"/>
+            <MenuItem {...props} icon={<ProfileIcon/>} title="Profile" desc="Edit your profile"/>
+            <MenuItem {...props} icon={<ImageIcon/>} title="Background" desc="Set your own custom background"/>
+            <MenuItem {...props} icon={<QuotesIcon/>} title="Quotes" desc="Spark creativity and passion with uplifing quotes!"/>
+            <MenuItem {...props} icon={<TodoIcon/>} title="Todo List" desc="Keep on top of your daily tasks"/>
+            <MenuItem {...props} icon={<DarkmodeIcon/>} toggle title="Dark Mode" desc="For the lightmode weirdos out there :)"/>
+        </div>
+    )
+}
+
+const SideMenu = (props) => {
+    return (
+        <div>
+            <section className="menu-side-header">
+                <ChevronLeft onClick={() => props.updateMenu("main")}/>
+                <h1>{props.title}</h1>
+            </section>
+            <hr/>
         </div>
     )
 }
@@ -63,7 +84,7 @@ const MainMenu = (props) => {
 const MenuItem = (props) => {
     const {icon, title, desc, toggle} = props;
     return (
-        <div className="menu-main-item">
+        <div className="menu-main-item" onClick={() => props.updateMenu(title)}>
         {icon}
         <span>
             <h3>{title}</h3>
