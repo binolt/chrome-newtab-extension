@@ -1,0 +1,403 @@
+.app {
+  width: 100vw;
+  height: 100vh;
+  background-position: center;
+  background-size: cover;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: fixed;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 20px;
+  background-color: #272823;
+  -webkit-transition: opacity 2s ease;
+  transition: opacity 2s ease;
+}
+
+.app p {
+  color: #fff;
+}
+
+.app-container {
+  position: fixed;
+  background: rgba(228, 231, 255, 0.5);
+  -webkit-box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+          box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 2rem 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.app-container h1 {
+  color: #fff;
+  font-weight: 300;
+}
+
+.content-square {
+  margin: 0rem 1rem;
+  background: rgba(255, 0, 0, 0.75);
+  -webkit-box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.8);
+          box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.8);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  width: 100px;
+  height: 100px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.content-square svg {
+  width: 100px;
+  height: 100px;
+}
+
+.arrow-right {
+  width: 0;
+  height: 0;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 30px solid #fff;
+  margin-left: .4rem;
+  border-radius: 3px;
+}
+
+.content-search {
+  z-index: 2;
+  top: 3rem;
+  left: 3rem;
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 350px;
+  height: 36px;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.25);
+  -webkit-backdrop-filter: blur(4px);
+          backdrop-filter: blur(4px);
+  -webkit-box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.3);
+          box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.3);
+}
+
+.content-search form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 88%;
+}
+
+.content-search input {
+  font-size: .68em;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  padding: 0rem .5rem;
+  width: 84%;
+}
+
+.content-search input::-webkit-input-placeholder {
+  color: #272823;
+}
+
+.content-search input:-ms-input-placeholder {
+  color: #272823;
+}
+
+.content-search input::-ms-input-placeholder {
+  color: #272823;
+}
+
+.content-search input::placeholder {
+  color: #272823;
+}
+
+.content-search-head {
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 12%;
+  background-color: #272823;
+}
+
+.content-icons-google {
+  width: 18px;
+  height: 18px;
+}
+
+.content-search-foot {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  width: 12%;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  cursor: pointer;
+}
+
+.content-search-foot svg {
+  fill: #272823;
+  width: 22px;
+  height: 22px;
+}
+
+.content-time {
+  position: absolute;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  bottom: 1rem;
+  font-size: 3em;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+          box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  padding: .5rem 1.25rem;
+  text-shadow: 1px 2px 5px #00000042;
+}
+
+.content-menu-placeholder {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  cursor: pointer;
+}
+
+.content-menu-placeholder svg {
+  padding: .5rem .75rem;
+  fill: #fff;
+}
+
+.menu-modal {
+  -webkit-box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+          box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  position: absolute;
+  left: 1.75rem;
+  bottom: 1.5rem;
+  width: 425px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.menu-modal h1 {
+  color: #272823;
+}
+
+.menu-modal img {
+  width: 80px;
+  cursor: pointer;
+  margin: 0rem .5rem;
+}
+
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: transparent;
+}
+
+.menu {
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.7);
+  -webkit-transition: all 1.5s ease;
+  transition: all 1.5s ease;
+  font-size: 16px;
+}
+
+.menu hr {
+  margin: 0;
+  border-color: #353535;
+}
+
+.menu-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 60px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.menu-header h1 {
+  color: #cccccc;
+  font-weight: 400;
+  margin: 0 auto;
+  font-size: 1.8em;
+}
+
+.menu-main-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  color: #fff;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: .75rem 1rem;
+  border-bottom: 1px solid #353535;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+  -webkit-transition: background-color 0.5s ease;
+  transition: background-color 0.5s ease;
+}
+
+.menu-main-item h3 {
+  font-size: 1em;
+  font-weight: 500;
+}
+
+.menu-main-item p {
+  font-size: .75em;
+  color: #999999;
+}
+
+.menu-main-item span {
+  padding: 0 .5rem;
+}
+
+.menu-main-item svg {
+  fill: url(#my-cool-gradient) #447799;
+  width: 30px;
+  height: 30px;
+}
+
+.menu-main-item:hover {
+  background-color: #c2c2c221;
+}
+
+.menu-main-item .menu-main-item-toggle {
+  position: absolute;
+  right: 1rem;
+}
+
+.menu-footer {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: .5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.menu-footer p {
+  color: #999999;
+  font-size: .8em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.menu-footer p svg {
+  fill: url(#my-cool-gradient);
+}
+
+.menu-close {
+  fill: #b1b1b1;
+  position: absolute;
+  top: 0;
+  right: 1rem;
+  width: 26px;
+  height: 60px;
+  cursor: pointer;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.menu-close:hover {
+  fill: #fff;
+}
+
+.ReactModal__Overlay {
+  -webkit-transform: translateY(10px);
+          transform: translateY(10px);
+  -webkit-transition: all 250ms ease-in-out;
+  transition: all 250ms ease-in-out;
+  opacity: 0;
+}
+
+.ReactModal__Overlay--after-open {
+  -webkit-transform: translateX(0px);
+          transform: translateX(0px);
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  -webkit-transform: translateY(10px);
+          transform: translateY(10px);
+  opacity: 0;
+}
+
+.ReactModal--after-open {
+  background-color: orange;
+}
+/*# sourceMappingURL=app.css.map */
