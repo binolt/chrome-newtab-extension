@@ -1,16 +1,15 @@
 import React, { useEffect, useState, useContext } from 'react';
+import SideMenu from "./side-menu"
+import UnsplashMenu from './background-menus/unsplash-menu';
+import MenuItem from "./menu-item";
 import {CSSTransition} from "react-transition-group";
-import { createApi } from 'unsplash-js';
 
 import {ReactComponent as ProfileIcon} from "../icons/settings/people_alt-black-48dp.svg"
 import {ReactComponent as DarkmodeIcon} from "../icons/settings/dark_mode-black-48dp.svg"
 import {ReactComponent as ImageIcon} from "../icons/settings/image-black-48dp.svg"
 import {ReactComponent as TodoIcon} from "../icons/settings/layers-black-48dp.svg"
-import {ReactComponent as ToggleIcon} from "../icons/settings/toggle_on-black-48dp.svg"
 import {ReactComponent as QuotesIcon} from "../icons/settings/wb_twilight-black-48dp.svg"
 // import {ReactComponent as Heart} from "../icons/settings/heart.svg"
-import BackgroundMenu from "./background-menu"
-import SideMenu from "./side-menu"
 
 export const AuthContext = React.createContext();
 
@@ -18,57 +17,65 @@ export function useAuth() {
     return useContext(AuthContext);
   }
 
-const unsplash = createApi({
-    accessKey: 'oymaM_SVwaKMAPAb0Frcs3OiuMC2_cTuh47uKkin0kE',
-    headers: { 'X-Custom-Header': 'foo' },
-  });
 
 const Menu = (props) => {
     const [currentMenu, setCurrentMenu] = useState("main")
     const [loaded, setLoaded] = useState(false);
-    const [previousMenu, setPreviousMenu] = useState("");
+    const [previousMenus, setPreviousMenus] = useState([]);
 
     useEffect(() => {
         setLoaded(true)
     }, [])
 
     const updateMenu = (targetMenu) => {
-        setPreviousMenu(currentMenu);
+        const prevMenus = previousMenus;
+        prevMenus.push(currentMenu);
+
+        setPreviousMenus(prevMenus);
         setCurrentMenu(targetMenu)
+    }
+
+    const handlePrevMenu = () => {
+        const prevMenus = previousMenus;
+        const lastMenu = prevMenus.pop();
+        setCurrentMenu(lastMenu)
+        setPreviousMenus(prevMenus)
     }
 
     const value = {
         currentMenu,
-        previousMenu
+        previousMenus,
+        updateMenu,
+        handlePrevMenu
     }
 
     return ( 
         <AuthContext.Provider value={value}>
         <div className="menu" style={{backdropFilter: loaded ? "blur(4px) opacity(1)" : "blur(4px) opacity(0)"}}>
             <CSSTransition in={currentMenu === "main"} unmountOnExit>
-                <MainMenu updateMenu={updateMenu}/>
+                <MainMenu/>
             </CSSTransition>
             {/* BACKGROUND MENUS */}
-                <CSSTransition in={currentMenu === "Background"} unmountOnExit>
-                    <SideMenu updateMenu={updateMenu} title="Background">
-                        <MenuItem {...props} updateMenu={updateMenu} icon={<ProfileIcon/>} title="Unsplash" desc="Browse the Unsplash library"/>
-                        <MenuItem {...props} icon={<ImageIcon/>} title="Upload" desc="Use your own custom image"/> 
-                    </SideMenu>
-                </CSSTransition>
-                <CSSTransition in={currentMenu === "Unsplash"} unmountOnExit>
-                    <SideMenu updateMenu={updateMenu} title="Unsplash">
-                        <BackgroundMenu {...props}/>
-                    </SideMenu>
-                </CSSTransition>
+            <CSSTransition in={currentMenu === "Background"} unmountOnExit>
+                <SideMenu title="Background">
+                    <MenuItem {...props} icon={<ProfileIcon/>} title="Unsplash" desc="Browse the Unsplash library"/>
+                    <MenuItem {...props} icon={<ImageIcon/>} title="Upload" desc="Use your own custom image"/> 
+                </SideMenu>
+            </CSSTransition>
+            <CSSTransition in={currentMenu === "Unsplash"} unmountOnExit>
+                <SideMenu title="Unsplash">
+                    <UnsplashMenu {...props}/>
+                </SideMenu>
+            </CSSTransition>
             {/* PROFILE MENUS */}
             <CSSTransition in={currentMenu === "Profile"} unmountOnExit>
-                <SideMenu updateMenu={updateMenu} title="Profile"/>
+                <SideMenu title="Profile"/>
             </CSSTransition>
             <CSSTransition in={currentMenu === "Quotes"} unmountOnExit>
-                <SideMenu updateMenu={updateMenu} title="Quotes"/>
+                <SideMenu title="Quotes"/>
             </CSSTransition>
             <CSSTransition in={currentMenu === "Todo List"} unmountOnExit>
-                <SideMenu updateMenu={updateMenu} title="Todo List"/>
+                <SideMenu title="Todo List"/>
             </CSSTransition>
         </div>  
         </AuthContext.Provider>
@@ -92,54 +99,3 @@ const MainMenu = (props) => {
         </div>
     )
 }
-
-// const SideMenu = (props) => {
-//     return (
-//         <div>
-//             <section className="menu-side-header">
-//                 <ChevronLeft onClick={() => props.updateMenu("main")}/>
-//                 <h1>{props.title}</h1>
-//             </section>
-//             <hr/>
-//             {props.children}
-//         </div>
-//     )
-// }
-
-const MenuItem = (props) => {
-    const {icon, title, desc, toggle} = props;
-    return (
-        <div className="menu-main-item" onClick={() => props.updateMenu(title)}>
-        {icon}
-        <span>
-            <h3>{title}</h3>
-            <p>{desc}</p>
-        </span>
-        {toggle && <ToggleIcon className="menu-main-item-toggle"/>}
-    </div>
-    )
-}
-
-// const BackgroundMenu = (props) => {
-//     const [images, setImages] = useState([])
-//     useEffect(() => {
-//         unsplash.search.getPhotos({
-//             query: 'beach',
-//             perPage: 10,
-//             orientation: 'landscape',
-//           }).then(data => {
-//             let imgs = []
-//             data.response.results.forEach((img => {
-//               imgs.push(img.urls.full)
-//             }))
-//             setImages(imgs)
-//           })
-//     }, [])
-//     return (
-//         <div>
-//             {images.map(((image, index) => {
-//             return <img onClick={() => props.changeImage(image)} key={image} src={image} alt={`cat-${index}`}/>
-//             }))}
-//         </div>
-//     )
-// }
