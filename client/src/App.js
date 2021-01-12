@@ -39,8 +39,8 @@ const App = () => {
   }, [])
 
   const changeImage = (img) => {
-    localStorage.setItem("backgroundImg", img);
-    setBackgroundImage(img)
+    localStorage.setItem("backgroundImg", img.urls.full);
+    setBackgroundImage(img.urls.full)
   }
 
   return ( 
