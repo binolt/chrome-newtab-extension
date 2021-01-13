@@ -3,6 +3,7 @@ import SideMenu from "./side-menu"
 import UnsplashMenu from './background-menus/unsplash-menu';
 import MenuItem from "./menu-item";
 import {CSSTransition} from "react-transition-group";
+import "../css/menu/menu.css"
 
 import {ReactComponent as ProfileIcon} from "../icons/settings/people_alt-black-48dp.svg"
 import {ReactComponent as DarkmodeIcon} from "../icons/settings/dark_mode-black-48dp.svg"

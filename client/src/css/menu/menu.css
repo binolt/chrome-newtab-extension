@@ -1,0 +1,423 @@
+.menu-modal {
+  position: absolute;
+  left: 1.75rem;
+  bottom: 1.5rem;
+  width: 450px;
+  border: none;
+  outline: none;
+}
+
+.menu-modal h1 {
+  color: #272823;
+}
+
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: transparent;
+}
+
+.menu {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+          box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.7);
+  -webkit-transition: all 1.5s ease;
+  transition: all 1.5s ease;
+  font-size: 16px;
+  height: 380px;
+  width: 450px;
+}
+
+.menu hr {
+  margin: 0;
+  border-color: #353535;
+}
+
+.menu-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 60px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.menu-header h1 {
+  color: #cccccc;
+  font-weight: 400;
+  margin: 0 auto;
+  font-size: 1.8em;
+}
+
+.menu-main-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  color: #fff;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: .75rem 1rem;
+  border-bottom: 1px solid #353535;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+  -webkit-transition: background-color 0.5s ease;
+  transition: background-color 0.5s ease;
+}
+
+.menu-main-item h3 {
+  font-size: 1em;
+  font-weight: 500;
+}
+
+.menu-main-item p {
+  font-size: .75em;
+  color: #999999;
+}
+
+.menu-main-item span {
+  padding: 0 .5rem;
+}
+
+.menu-main-item svg {
+  fill: url(#my-cool-gradient) #447799;
+  width: 30px;
+  height: 30px;
+}
+
+.menu-main-item:hover {
+  background-color: #c2c2c221;
+}
+
+.menu-main-item .menu-main-item-toggle {
+  position: absolute;
+  right: 1rem;
+}
+
+.menu-footer {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: .5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.menu-footer p {
+  color: #999999;
+  font-size: .8em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.menu-footer p svg {
+  fill: url(#my-cool-gradient);
+}
+
+.menu-close {
+  fill: #444444;
+  position: absolute;
+  top: 0;
+  right: 1rem;
+  width: 26px;
+  height: 60px;
+  cursor: pointer;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.menu-close:hover {
+  fill: #fff;
+}
+
+.menu-side {
+  height: 380px;
+}
+
+.menu-side-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 60px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 0 .5rem;
+}
+
+.menu-side-header h1 {
+  color: #cccccc;
+  font-weight: 400;
+  margin: 0 auto;
+  font-size: 1.8em;
+}
+
+.menu-side-header svg {
+  fill: url(#my-cool-gradient);
+  width: 38px;
+  height: 38px;
+  cursor: pointer;
+  margin-right: .5rem;
+}
+
+.menu-side-body {
+  height: 320px;
+}
+
+.menu-unsplash {
+  height: 100%;
+}
+
+.menu-unsplash-header {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.menu-unsplash-header h1 {
+  padding: .25rem 0rem;
+  margin-left: 1rem;
+  font-weight: 100;
+  color: #fff;
+  font-size: 1.75em;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  border-radius: 5px;
+}
+
+.menu-unsplash-search {
+  background-color: #f1f2f5;
+  width: 130px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  right: 1rem;
+  position: absolute;
+  height: 30px;
+  border-radius: 5px;
+}
+
+.menu-unsplash-search input {
+  width: 78%;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: #6c7279;
+}
+
+.menu-unsplash-search svg {
+  cursor: pointer;
+  fill: #a5a4a4;
+  width: 18px;
+  height: 18px;
+  margin-left: .5rem;
+  margin-right: .1rem;
+}
+
+.menu-unsplash-category-wrapper {
+  height: 261px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  padding: 0 1rem;
+  padding-bottom: 1rem;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.menu-unsplash-category {
+  width: 130px;
+  height: 110px;
+  background-size: cover;
+  border-radius: 5px;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  cursor: pointer;
+  border: 1px solid #2b312f;
+  overflow: hidden;
+}
+
+.menu-unsplash-category h1 {
+  color: #fff;
+  z-index: 2;
+  font-size: 1.5em;
+  font-weight: 100;
+  text-shadow: 1px 2px 3px #000000;
+}
+
+.menu-unsplash-category::after {
+  position: absolute;
+  content: "";
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 200px;
+  height: 200px;
+  border-radius: 5px;
+  -webkit-transition: background-color 0.35s ease;
+  transition: background-color 0.35s ease;
+}
+
+.menu-unsplash-category:hover::after {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.menu-unsplash-query-title {
+  padding: .25rem .5rem !important;
+  background-color: rgba(138, 138, 138, 0.24);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-right: .25rem !important;
+}
+
+.menu-unsplash-query-title svg {
+  fill: #646464;
+  width: 26px;
+  height: 26px;
+  margin-top: .25rem;
+  margin-left: .25rem;
+  cursor: pointer;
+  -webkit-transition: fill 0.15s ease;
+  transition: fill 0.15s ease;
+}
+
+.menu-unsplash-query-title svg:hover {
+  fill: #fff;
+}
+
+.menu-unsplash-query-wrapper {
+  height: 261px;
+  position: relative;
+}
+
+.menu-unsplash-query-footer {
+  position: absolute;
+  bottom: .7rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 20px;
+  width: 100%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.menu-unsplash-query-footer button {
+  background-color: rgba(138, 138, 138, 0.24);
+  outline: none;
+  border: none;
+  border-radius: 3px;
+  padding: 0 1rem;
+  color: #a8adbb;
+}
+
+.menu-unsplash-query {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  padding: calc(1rem - 5px);
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.menu-unsplash-query-image {
+  border: 1px solid #2b312f;
+  -webkit-box-flex: 2;
+      -ms-flex-positive: 2;
+          flex-grow: 2;
+  width: 80px;
+  height: 65px;
+  background-size: cover;
+  border-radius: 3px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 5px;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+}
+
+.menu-unsplash-query-image::after {
+  position: absolute;
+  content: "";
+  background-color: rgba(0, 0, 0, 0);
+  width: 200px;
+  height: 200px;
+  -webkit-transition: background-color 0.25s ease;
+  transition: background-color 0.25s ease;
+}
+
+.menu-unsplash-query-image:hover::after {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+/*# sourceMappingURL=menu.css.map */
