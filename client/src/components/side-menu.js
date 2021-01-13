@@ -9,13 +9,15 @@ import {ReactComponent as ChevronLeft} from "../icons/settings/chevron_left-blac
 const SideMenu = (props) => {
     const { handlePrevMenu } = useAuth();
     return (
-        <div>
+        <div className="menu-side">
             <section className="menu-side-header">
                 <ChevronLeft onClick={handlePrevMenu}/>
                 <h1>{props.title}</h1>
             </section>
             <hr/>
-            {props.children}
+            <section className="menu-side-body">
+                {props.children}
+            </section>
         </div>
     )
 }

@@ -79,7 +79,7 @@ const UnsplashMenu = (props) => {
         {/* {images.map(((image, index) => {
           return <div className="menu-unsplash-image" key={`image-${image.id}`} onClick={() => props.changeImage(image)} style={{backgroundImage: `url(${image.urls.small})`}} alt={`cat-${index}`}/>
         }))} */}
-        <GridLoader loading={!loaded} css={override} color="blue" size={15}/>
+        {/* <GridLoader loading={!loaded} css={override} color="blue" size={15}/> */}
       </div>
     </div>
   )
