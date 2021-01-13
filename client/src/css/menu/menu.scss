@@ -33,6 +33,7 @@
     }
     height: 380px;
     width: 450px;
+    overflow: hidden;
 }
 
 .menu-header {
@@ -316,8 +317,8 @@
         position: absolute;
         content: "";
         background-color: rgba(0, 0, 0, 0);
-        width: 200px;
-        height: 200px;
+        width: 100px;
+        height: 65px;
         transition: background-color 0.25s ease;
     }
     &:hover {
@@ -325,4 +326,19 @@
             background-color: rgba(0, 0, 0, 0.5);
         }
     }
+}
+
+.menu-transition-enter {
+    opacity: 0;
+}
+.menu-transition-enter-active {
+    opacity: 1;
+    transition: opacity 200ms;
+}
+.menu-transition-exit {
+    opacity: 1;
+}
+.menu-transition-exit-active {
+    opacity: 0;
+    transition: all 200ms;
 }

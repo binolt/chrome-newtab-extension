@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import { createApi } from 'unsplash-js';
 import GridLoader from "react-spinners/GridLoader";
 import { css } from "@emotion/core";
@@ -31,7 +31,6 @@ const DEFAULT_CATEGORIES = [
 
 const UnsplashMenu = (props) => {
   const [images, setImages] = useState([])
-  const [loaded, setLoaded] = useState(false);
   const [menu, setMenu] = useState("category");
   const [query, setQuery] = useState("");
   const [imagesLoaded, setImagesLoaded] = useState(false);
@@ -83,14 +82,14 @@ const UnsplashMenu = (props) => {
           <input type="text"/>
         </div>
       </div>
-      <CSSTransition in={menu === "category"} unmountOnExit>
+      <CSSTransition in={menu === "category"} unmountOnExit timeout={200} classNames="menu-transition">
         <div className="menu-unsplash-category-wrapper">
           {DEFAULT_CATEGORIES.map((category) => {
             return <Category updateQuery={updateQuery} key={`category-${category.query}`} category={category}/>
           })}
         </div>
       </CSSTransition>
-      <CSSTransition in={menu === "query"} unmountOnExit>
+      <CSSTransition in={menu === "query"} unmountOnExit timeout={200} classNames="menu-transition">
         <div className="menu-unsplash-query-wrapper">
           <UnsplashQuery {...props} images={images} imagesLoaded={imagesLoaded}/>
           <span className="menu-unsplash-query-footer">
@@ -119,8 +118,9 @@ const UnsplashQuery = (props) => {
   return (
     <div className="menu-unsplash-query">
       {props.images && props.imagesLoaded && props.images.map((img => {
-        return <div onClick={() => props.changeImage(img)} className="menu-unsplash-query-image" style={{backgroundImage: `url(${img.urls.small})`}}/>
+        return <div key={`img-${img.id}`} onClick={() => props.changeImage(img)} className="menu-unsplash-query-image" style={{backgroundImage: `url(${img.urls.small})`}}/>
       }))}
+      <GridLoader loading={!props.imagesLoaded} css={override} size={15} color="red"/>
     </div>
   )
 }

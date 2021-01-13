@@ -52,33 +52,23 @@ const Menu = (props) => {
 
     return ( 
         <AuthContext.Provider value={value}>
-        <div className="menu" style={{backdropFilter: loaded ? "blur(4px) opacity(1)" : "blur(4px) opacity(0)"}}>
-            <CSSTransition in={currentMenu === "main"} unmountOnExit>
-                <MainMenu/>
-            </CSSTransition>
-            {/* BACKGROUND MENUS */}
-            <CSSTransition in={currentMenu === "Background"} unmountOnExit>
+            <div className="menu" style={{backdropFilter: loaded ? "blur(4px) opacity(1)" : "blur(4px) opacity(0)"}}>
+                <CSSTransition in={currentMenu === "main"} unmountOnExit timeout={200} classNames="menu-transition">
+                    <MainMenu/>
+                </CSSTransition>
+                {/* BACKGROUND MENUS */}
                 <SideMenu title="Background">
                     <MenuItem {...props} icon={<ProfileIcon/>} title="Unsplash" desc="Browse the Unsplash library"/>
                     <MenuItem {...props} icon={<ImageIcon/>} title="Upload" desc="Use your own custom image"/> 
                 </SideMenu>
-            </CSSTransition>
-            <CSSTransition in={currentMenu === "Unsplash"} unmountOnExit>
                 <SideMenu title="Unsplash">
                     <UnsplashMenu {...props}/>
                 </SideMenu>
-            </CSSTransition>
-            {/* PROFILE MENUS */}
-            <CSSTransition in={currentMenu === "Profile"} unmountOnExit>
+                {/* PROFILE MENUS */}
                 <SideMenu title="Profile"/>
-            </CSSTransition>
-            <CSSTransition in={currentMenu === "Quotes"} unmountOnExit>
                 <SideMenu title="Quotes"/>
-            </CSSTransition>
-            <CSSTransition in={currentMenu === "Todo List"} unmountOnExit>
                 <SideMenu title="Todo List"/>
-            </CSSTransition>
-        </div>  
+            </div>  
         </AuthContext.Provider>
      );
 }

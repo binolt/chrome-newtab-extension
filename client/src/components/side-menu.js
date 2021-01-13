@@ -1,5 +1,6 @@
 import React from 'react';
 import {useAuth} from "./menu"
+import { CSSTransition } from 'react-transition-group';
 
 
 //ICONS
@@ -7,18 +8,21 @@ import {ReactComponent as ChevronLeft} from "../icons/settings/chevron_left-blac
 
 
 const SideMenu = (props) => {
-    const { handlePrevMenu } = useAuth();
+    const { handlePrevMenu, currentMenu } = useAuth();
+    const {title, children} = props;
     return (
+        <CSSTransition in={currentMenu === title} unmountOnExit timeout={200} classNames="menu-transition">
         <div className="menu-side">
             <section className="menu-side-header">
                 <ChevronLeft onClick={handlePrevMenu}/>
-                <h1>{props.title}</h1>
+                <h1>{title}</h1>
             </section>
             <hr/>
             <section className="menu-side-body">
-                {props.children}
+                {children}
             </section>
         </div>
+        </CSSTransition>
     )
 }
  

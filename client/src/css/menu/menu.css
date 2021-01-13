@@ -32,6 +32,7 @@
   font-size: 16px;
   height: 380px;
   width: 450px;
+  overflow: hidden;
 }
 
 .menu hr {
@@ -411,13 +412,33 @@
   position: absolute;
   content: "";
   background-color: rgba(0, 0, 0, 0);
-  width: 200px;
-  height: 200px;
+  width: 100px;
+  height: 65px;
   -webkit-transition: background-color 0.25s ease;
   transition: background-color 0.25s ease;
 }
 
 .menu-unsplash-query-image:hover::after {
   background-color: rgba(0, 0, 0, 0.5);
+}
+
+.menu-transition-enter {
+  opacity: 0;
+}
+
+.menu-transition-enter-active {
+  opacity: 1;
+  -webkit-transition: opacity 200ms;
+  transition: opacity 200ms;
+}
+
+.menu-transition-exit {
+  opacity: 1;
+}
+
+.menu-transition-exit-active {
+  opacity: 0;
+  -webkit-transition: all 200ms;
+  transition: all 200ms;
 }
 /*# sourceMappingURL=menu.css.map */
