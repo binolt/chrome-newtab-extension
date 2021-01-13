@@ -310,15 +310,22 @@
 
 .menu-unsplash-header {
     box-sizing: border-box;
-    height: 45px;
     position: relative;
     display: flex;
     align-items: center;
+    margin-top: 10px;
+    margin-bottom: 5px;
     h1 {
-        margin-left: calc(1rem + 3px);
+        padding: .25rem 0rem;
+        margin-left: 1rem;
         font-weight: 100;
         color: #fff;
         font-size: 1.75em;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        height: fit-content;
+        border-radius: 5px;
     }
 }
 
@@ -348,59 +355,22 @@
     }
 }
 
-// .menu-unsplash-image-wrapper {
-//     display: flex;
-//     flex-wrap: wrap;
-//     box-sizing: border-box;
-//     padding: 1rem;
-//     padding-right: .5rem;
-// }
-
-// .menu-unsplash-image {
-//     flex-grow: 1;
-//     width: 70px;
-//     height: 70px;
-//     background-size: cover;
-//     border: 2px solid rgb(85, 85, 85);
-//     border-radius: 3px;
-//     margin-right: .5rem;
-//     margin-bottom: .5rem;
-//     cursor: pointer;
-//     z-index: 1;
-//     position: relative;
-//     &::after {
-//         transition: all 0.3s ease;
-//         position: absolute;
-//         content: "";
-//         width:100%;
-//         height: 70px;
-//         background: transparent;
-//         z-index: 2;
-//     }
-//     &:hover {
-//         &::after {
-//             background: rgba(0, 0, 0, 0.363);
-//         }
-//     }
-// }
-
 
 //UNSPLASH CATEGORIES
 .menu-unsplash-category-wrapper {
-    height: 273px;
+    height: 261px;
     display: flex;
     flex-wrap: wrap;
     box-sizing: border-box;
-    padding: 1rem;
-    padding-top: 0;
     align-items: flex-end;
+    padding: 0 1rem;
+    padding-bottom: 1rem;
     justify-content: space-between;
-
 }
 
 .menu-unsplash-category {
     width: 130px;
-    height: 115px;
+    height: 110px;
     background-size: cover;
     border-radius: 5px;
     position: relative;
@@ -414,17 +384,98 @@
         color: #fff;
         z-index: 2;
         font-size: 1.5em;
-        font-weight: 300;
+        font-weight: 100;
         text-shadow: 1px 2px 3px #000000;
     }
     &::after {
         position: absolute;
         content: "";
-        background-color: rgba(0, 0, 0, 0.3);
+        background-color: rgba(0, 0, 0, .5);
         width: 200px;
         height: 200px;
         border-radius: 5px;
         transition: background-color 0.35s ease;
+    }
+    &:hover {
+        &::after {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+    }
+}
+
+//UNSPLASH QUERY
+
+.menu-unsplash-query-title {
+    padding: .25rem .5rem !important;
+    background-color: rgba(138, 138, 138, 0.24);
+    display: flex;
+    align-items: center;
+    padding-right: .25rem !important;
+    svg {
+        fill: rgb(100, 100, 100);
+        width: 26px;
+        height: 26px;
+        margin-top: .25rem;
+        margin-left: .25rem;
+        cursor: pointer;
+        transition: fill 0.15s ease;
+        &:hover {
+            fill: #fff;
+        }
+    }
+}
+
+.menu-unsplash-query-wrapper {
+    height: 261px;
+    position: relative;
+}
+
+.menu-unsplash-query-footer {
+    position: absolute;
+    bottom: .7rem;
+    display: flex;
+    height: 20px;
+    width: 100%;
+    justify-content: center;
+    button {
+        background-color: rgba(138, 138, 138, 0.24);
+        outline: none;
+        border: none;
+        border-radius: 3px;
+        padding: 0 1rem;
+        color: #a8adbb;
+    }
+}
+
+.menu-unsplash-query {
+    display: flex;
+    flex-wrap: wrap;
+    padding: calc(1rem - 5px);
+    box-sizing: border-box;
+    justify-content: space-between;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.menu-unsplash-query-image {
+    border: 1px solid rgb(43, 49, 47);
+    flex-grow: 2;
+    width: 80px;
+    height: 65px;
+    background-size: cover;
+    border-radius: 3px;
+    box-sizing: border-box;
+    margin: 5px;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    &::after {
+        position: absolute;
+        content: "";
+        background-color: rgba(0, 0, 0, 0);
+        width: 200px;
+        height: 200px;
+        transition: background-color 0.25s ease;
     }
     &:hover {
         &::after {

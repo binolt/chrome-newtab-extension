@@ -4,6 +4,8 @@ import GridLoader from "react-spinners/GridLoader";
 import { css } from "@emotion/core";
 
 import {ReactComponent as SearchIcon} from "../../icons/search-black-24dp.svg"
+import {ReactComponent as CloseIcon} from "../../icons/settings/close-black-48dp.svg"
+import { CSSTransition } from 'react-transition-group';
 
 const unsplash = createApi({
     accessKey: process.env.REACT_APP_UNSPLASH_API_KEY,
@@ -29,21 +31,22 @@ const DEFAULT_CATEGORIES = [
 
 const UnsplashMenu = (props) => {
   const [images, setImages] = useState([])
-  const [loaded, setLoaded] = useState(false)
+  const [loaded, setLoaded] = useState(false);
+  const [menu, setMenu] = useState("category");
+  const [query, setQuery] = useState("");
+  const [imagesLoaded, setImagesLoaded] = useState(false);
 
-  const fetchImages = () => {
-    unsplash.search.getPhotos({
-      query: 'beach',
-      perPage: 10,
+
+  const fetchImages = async(query) => {
+    const data = await unsplash.search.getPhotos({
+      query: query,
+      perPage:12,
       orientation: 'landscape',
-    }).then(data => {
-      let imgs = []
-      data.response.results.forEach((img => {
-        imgs.push(img)
-      }))
-      setImages(imgs)
-      cacheImages(imgs)
-    })
+    });
+    const imgs = data.response.results;
+    await cacheImages(imgs)
+    setImages(imgs);
+    setImagesLoaded(true)
   }
 
   const cacheImages = async(imgs) => {
@@ -56,31 +59,45 @@ const UnsplashMenu = (props) => {
       })
     }))
     await Promise.all(promises);
-    setLoaded(true)
   }
 
-  useEffect(() => {
-    fetchImages()
-  }, [])
+  const updateQuery = (query) => {
+    fetchImages(query);
+    setMenu("query")
+    setQuery(query);
+  }
+
+  const closeQuery = () => {
+    setQuery("");
+    setImages([])
+    setImagesLoaded(false)
+    setMenu("category")
+  }
 
   return (
     <div className="menu-unsplash">
       <div className="menu-unsplash-header">
-        <h1>Categories</h1>
+        <span>{query ? <h1 className="menu-unsplash-query-title">{`#${query}`}<CloseIcon onClick={closeQuery}/></h1> : <h1>Categories</h1>}</span>
         <div className="menu-unsplash-search">
           <SearchIcon/>
           <input type="text"/>
         </div>
       </div>
-      <div className="menu-unsplash-category-wrapper">
-        {DEFAULT_CATEGORIES.map((category) => {
-          return <Category key={`category-${category.query}`} category={category}/>
-        })}
-        {/* {images.map(((image, index) => {
-          return <div className="menu-unsplash-image" key={`image-${image.id}`} onClick={() => props.changeImage(image)} style={{backgroundImage: `url(${image.urls.small})`}} alt={`cat-${index}`}/>
-        }))} */}
-        {/* <GridLoader loading={!loaded} css={override} color="blue" size={15}/> */}
-      </div>
+      <CSSTransition in={menu === "category"} unmountOnExit>
+        <div className="menu-unsplash-category-wrapper">
+          {DEFAULT_CATEGORIES.map((category) => {
+            return <Category updateQuery={updateQuery} key={`category-${category.query}`} category={category}/>
+          })}
+        </div>
+      </CSSTransition>
+      <CSSTransition in={menu === "query"} unmountOnExit>
+        <div className="menu-unsplash-query-wrapper">
+          <UnsplashQuery {...props} images={images} imagesLoaded={imagesLoaded}/>
+          <span className="menu-unsplash-query-footer">
+            <button>Load More</button>
+          </span>
+        </div>
+      </CSSTransition>
     </div>
   )
 }
@@ -90,8 +107,20 @@ export default UnsplashMenu;
 const Category = (props) => {
   const {query, url} = props.category
   return (
-    <div className="menu-unsplash-category" style={{backgroundImage: `url(${url})`}}>
+    <div onClick={() => props.updateQuery(query)} className="menu-unsplash-category" style={{backgroundImage: `url(${url})`}}>
         <h1>#{query}</h1>
+    </div>
+  )
+}
+
+
+const UnsplashQuery = (props) => {
+
+  return (
+    <div className="menu-unsplash-query">
+      {props.images && props.imagesLoaded && props.images.map((img => {
+        return <div onClick={() => props.changeImage(img)} className="menu-unsplash-query-image" style={{backgroundImage: `url(${img.urls.small})`}}/>
+      }))}
     </div>
   )
 }
