@@ -232,12 +232,6 @@
   color: #272823;
 }
 
-.menu-modal img {
-  width: 80px;
-  cursor: pointer;
-  margin: 0rem .5rem;
-}
-
 .menu-overlay {
   position: fixed;
   top: 0;
@@ -405,6 +399,159 @@
   height: 38px;
   cursor: pointer;
   margin-right: .5rem;
+}
+
+.menu-unsplash-header {
+  height: 30px;
+  position: relative;
+  padding-top: .75rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.menu-unsplash-header h1 {
+  margin-left: calc(1rem + 3px);
+  font-weight: 100;
+  color: #fff;
+  font-size: 1.75em;
+}
+
+.menu-unsplash-search {
+  background-color: #f1f2f5;
+  width: 130px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  right: calc(1rem + 5px);
+  position: absolute;
+  height: 30px;
+  border-radius: 5px;
+}
+
+.menu-unsplash-search input {
+  width: 78%;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: #6c7279;
+}
+
+.menu-unsplash-search svg {
+  cursor: pointer;
+  fill: #a5a4a4;
+  width: 18px;
+  height: 18px;
+  margin-left: .5rem;
+  margin-right: .1rem;
+}
+
+.menu-unsplash-image-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 1rem;
+  padding-right: .5rem;
+}
+
+.menu-unsplash-image {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  width: 70px;
+  height: 70px;
+  background-size: cover;
+  border: 2px solid #555555;
+  border-radius: 3px;
+  margin-right: .5rem;
+  margin-bottom: .5rem;
+  cursor: pointer;
+  z-index: 1;
+  position: relative;
+}
+
+.menu-unsplash-image::after {
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 70px;
+  background: transparent;
+  z-index: 2;
+}
+
+.menu-unsplash-image:hover::after {
+  background: rgba(0, 0, 0, 0.363);
+}
+
+.menu-unsplash-category-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 1rem;
+  padding-top: .5rem;
+}
+
+.menu-unsplash-category {
+  -webkit-box-flex: 2;
+      -ms-flex-positive: 2;
+          flex-grow: 2;
+  width: 120px;
+  height: 115px;
+  background-size: cover;
+  margin: 5px;
+  border-radius: 5px;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  cursor: pointer;
+  border: 1px solid #2b312f;
+  overflow: hidden;
+}
+
+.menu-unsplash-category h1 {
+  color: #fff;
+  z-index: 2;
+  font-size: 1.5em;
+  font-weight: 300;
+  text-shadow: 1px 2px 3px #000000;
+}
+
+.menu-unsplash-category::after {
+  position: absolute;
+  content: "";
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 200px;
+  height: 200px;
+  border-radius: 5px;
+  -webkit-transition: background-color 0.35s ease;
+  transition: background-color 0.35s ease;
+}
+
+.menu-unsplash-category:hover::after {
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .ReactModal__Overlay {
