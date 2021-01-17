@@ -25,7 +25,6 @@
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     border-radius: 5px;
     background: rgba(0, 0, 0, 0.7);
-    transition: all 1.5s ease;
     font-size: 16px;
     hr {
         margin: 0;
@@ -34,6 +33,13 @@
     height: 380px;
     width: 450px;
     overflow: hidden;
+    position: relative;
+}
+
+.menu-main {
+    height: inherit;
+    width: inherit;
+    transition: opacity 0.5s ease;
 }
 
 .menu-header {
@@ -120,19 +126,24 @@
 //SIDE MENU
 
 .menu-side {
-    height: 380px;
+    height: inherit;
+    width: inherit;
+    hr {
+        border-color: rgb(139, 139, 139);
+    }
 }
 
 .menu-side-header {
-    display: flex;
-    height: 60px;
-    align-items: center;
-    width: fit-content;
-    padding: 0 .5rem;
+    width: inherit;
+    span {
+        display: flex;
+        padding: 0 .5rem;
+        height: 60px;
+        align-items: center;
+    }
     h1 {
         color: rgb(204, 204, 204);
         font-weight: 400;
-        margin: 0 auto;
         font-size: 1.8em;
     }
     svg {
@@ -326,19 +337,4 @@
             background-color: rgba(0, 0, 0, 0.5);
         }
     }
-}
-
-.menu-transition-enter {
-    opacity: 0;
-}
-.menu-transition-enter-active {
-    opacity: 1;
-    transition: opacity 200ms;
-}
-.menu-transition-exit {
-    opacity: 1;
-}
-.menu-transition-exit-active {
-    opacity: 0;
-    transition: all 200ms;
 }
