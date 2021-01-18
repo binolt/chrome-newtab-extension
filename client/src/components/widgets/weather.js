@@ -45,12 +45,17 @@ const Weather = () => {
     
     const fetchLocation = async () => {
         const coords = await getCoords()
-        localStorage.setItem("coords", JSON.stringify(coords));
+        const localWeatherData = JSON.parse(localStorage.getItem("weather"));
+        const updatedWeatherData = {
+            ...localWeatherData,
+            coords: coords
+        }
+        localStorage.setItem("weather", JSON.stringify(updatedWeatherData));
         return await getCity(coords);
     }
     
     const getCoords = async() => {
-        return new Promise(function(resolve, reject) {
+        return new Promise(function(resolve) {
             navigator.geolocation.getCurrentPosition(function(position) {
                 if(position) {
                     resolve({longitude: position.coords.longitude, latitude: position.coords.latitude})
@@ -62,12 +67,11 @@ const Weather = () => {
     const getCity = async(position) => {
         return new Promise(function(resolve) {
             // save loading time by checking local storage for stored city
-            const localCoords = JSON.parse(localStorage.getItem("coords"));
-            if(localCoords) {
+            const localWeatherData = JSON.parse(localStorage.getItem("weather"));
+            if(localWeatherData.coords) {
                 //if user hasn't changed their location
-                if(localCoords.longitude === position.longitude && localCoords.latitude === position.latitude) {
-                    const city = localStorage.getItem("userCity")
-                    resolve(city);
+                if(localWeatherData.coords.longitude === position.longitude && localWeatherData.coords.latitude === position.latitude) {
+                    resolve(localWeatherData.city);
                     return;
                 }
             }
@@ -76,7 +80,12 @@ const Weather = () => {
             .then((res => res.json()))
             .then(data => {
                 const city = data.address.city;
-                localStorage.setItem("userCity", city)
+                const localWeatherData = JSON.parse(localStorage.getItem("weather"));
+                const updatedWeather = {
+                    ...localWeatherData,
+                    city: city
+                }
+                localStorage.setItem("weather", JSON.stringify(updatedWeather));
                 resolve(city)
             })
         })
