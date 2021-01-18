@@ -35,6 +35,7 @@ const Menu = (props) => {
 
     const fetchLocation = async () => {
         const coords = await getCoords()
+        localStorage.setItem("coords", JSON.stringify(coords));
         return await getCity(coords);
     }
 
@@ -42,17 +43,32 @@ const Menu = (props) => {
         return new Promise(function(resolve, reject) {
             navigator.geolocation.getCurrentPosition(function(position) {
                 if(position) {
-                    resolve(position.coords)
+                    resolve({longitude: position.coords.longitude, latitude: position.coords.latitude})
                 }
             })
         })
     }
 
     const getCity = async(position) => {
-        return new Promise(function(resolve, reject) {
+        return new Promise(function(resolve) {
+            // save loading time by checking local storage for stored city
+            const localCoords = JSON.parse(localStorage.getItem("coords"));
+            if(localCoords) {
+                //if user hasn't changed their location
+                if(localCoords.longitude === position.longitude && localCoords.latitude === position.latitude) {
+                    const city = localStorage.getItem("userCity")
+                    resolve(city);
+                    return;
+                }
+            }
+            // if no local storage data, fetch city from api
             fetch(`https://us1.locationiq.com/v1/reverse.php?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&lat=${position.latitude}&lon=${position.longitude}&format=json`)
             .then((res => res.json()))
-            .then(data => resolve(data.address.city))
+            .then(data => {
+                const city = data.address.city;
+                localStorage.setItem("userCity", city)
+                resolve(city)
+            })
         })
     }
 
