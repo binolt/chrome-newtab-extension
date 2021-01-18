@@ -2,15 +2,14 @@ import React, { useEffect, useState } from 'react';
 import "../../css/weather/weather.css"
 import Moment from "react-moment";
 
-import {ReactComponent as CloudyIcon} from "../../icons/weather/wb_cloudy-black-24dp.svg"
+
 import {ReactComponent as SunnyIcon} from "../../icons/weather/wb_sunny-black-24dp.svg"
-import {ReactComponent as LocationIcon} from "../../icons/weather/location_on-black-24dp.svg"
 
 
 const Weather = () => {
     const [weatherLoaded, setWeatherLoaded] = useState(false);
     const [weatherData, setWeatherData] = useState(null);
-    const [date, setDate] = useState(new Date())
+    const date = new Date()
 
     useEffect(() => {
         getWeather()
@@ -59,6 +58,11 @@ const Weather = () => {
             navigator.geolocation.getCurrentPosition(function(position) {
                 if(position) {
                     resolve({longitude: position.coords.longitude, latitude: position.coords.latitude})
+                }
+            // if user denied geolocation services
+            }, function(error) {
+                if(error.code === error.PERMISSION_DENIED) {
+                    console.log(error)
                 }
             })
         })

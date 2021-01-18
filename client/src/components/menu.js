@@ -5,8 +5,12 @@ import MenuItem from "./menu-item";
 import "../css/menu/menu.css"
 import MainMenu from "./main-menu";
 
+
+
 import {ReactComponent as ProfileIcon} from "../icons/settings/people_alt-black-48dp.svg"
 import {ReactComponent as ImageIcon} from "../icons/settings/image-black-48dp.svg"
+import {ReactComponent as WeatherIcon} from "../icons/weather/wb_cloudy-black-24dp.svg"
+import WeatherMenu from './weather-menu';
 
 export const AuthContext = React.createContext();
 
@@ -64,8 +68,13 @@ const Menu = (props) => {
                     <UnsplashMenu {...props}/>
                 </SideMenu>
                 {/* PROFILE MENUS */}
-                {/* <SideMenu title="Profile"/>
-                <SideMenu title="Widgets"/> */}
+                <SideMenu title="Profile"/>
+                <SideMenu title="Widgets">
+                    <MenuItem icon={<WeatherIcon/>} title="Weather" desc="Get local weather info !" toggle/>
+                </SideMenu>
+                <SideMenu title="Weather">
+                    <WeatherMenu/>
+                </SideMenu>
             </div>  
         </AuthContext.Provider>
      );

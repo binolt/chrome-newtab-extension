@@ -3,6 +3,8 @@ import Moment from "react-moment"
 import "./css/app/app.css"
 import Modal from 'react-modal';
 import Menu from "./components/menu"
+import Weather from './components/widgets/weather';
+import { AuthProvider } from './context/WidgetContext';
 
 
 //ICONS
@@ -10,7 +12,6 @@ import {ReactComponent as MenuIcon} from "./icons/menu-black-24dp.svg"
 import {ReactComponent as Search} from "./icons/search-black-24dp.svg" 
 import {ReactComponent as Google} from "./icons/google-icon.svg" 
 import {ReactComponent as CloseIcon} from "./icons/settings/close-black-48dp.svg"
-import Weather from './components/widgets/weather';
 
 
 
@@ -47,7 +48,9 @@ const App = () => {
     setBackgroundImage(img.urls.full)
   }
 
-  return ( 
+  return (
+    <AuthProvider>
+
     <div className="app" style={{backgroundImage: `url(${backgroundImage})`, opacity: loaded ? 1 : 0}}>
       <div className="app-container">
         <a rel="noreferrer" className="content-square" href="https://www.youtube.com/" target="_blank">
@@ -85,6 +88,7 @@ const App = () => {
         </linearGradient>
       </svg>
     </div>
+    </AuthProvider>
    );
 }
  
