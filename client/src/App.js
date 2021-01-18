@@ -10,6 +10,7 @@ import {ReactComponent as MenuIcon} from "./icons/menu-black-24dp.svg"
 import {ReactComponent as Search} from "./icons/search-black-24dp.svg" 
 import {ReactComponent as Google} from "./icons/google-icon.svg" 
 import {ReactComponent as CloseIcon} from "./icons/settings/close-black-48dp.svg"
+import Weather from './components/widgets/weather';
 
 
 
@@ -20,6 +21,7 @@ const App = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [backgroundImage, setBackgroundImage] = useState("")
   const [loaded, setLoaded] = useState(false);
+
 
   const preload = () => {
     const background = localStorage.getItem("backgroundImg")
@@ -37,6 +39,8 @@ const App = () => {
       setDate(new Date())
     }, 1000);
   }, [])
+
+
 
   const changeImage = (img) => {
     localStorage.setItem("backgroundImg", img.urls.full);
@@ -61,6 +65,7 @@ const App = () => {
           </button>
         </form>
       </div>
+      <Weather/>
       <div className="content-menu-placeholder" onClick={() => setModalIsOpen(!modalIsOpen)}>
         <MenuIcon/>
       </div>
