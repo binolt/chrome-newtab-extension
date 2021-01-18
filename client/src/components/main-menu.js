@@ -12,7 +12,7 @@ import {ReactComponent as QuotesIcon} from "../icons/settings/wb_twilight-black-
 const MainMenu = () => {
     const { currentMenu } = useAuth();
     return currentMenu === "main" && (
-        <div className="menu-main" style={{opacity: currentMenu === "main" ? 1 : 0}}>
+        <div className="menu-main">
             <section className="menu-header">
                 <h1>Settings</h1>
             </section>

@@ -42,8 +42,8 @@
 .menu-main {
   height: inherit;
   width: inherit;
-  -webkit-transition: opacity 0.5s ease;
-  transition: opacity 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
 
 .menu-header {
