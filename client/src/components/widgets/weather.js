@@ -1,23 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import "../../css/weather/weather.css"
 import Moment from "react-moment";
+import { useAuth } from '../../context/WidgetContext';
 
-
+//ICONS
 import {ReactComponent as SunnyIcon} from "../../icons/weather/wb_sunny-black-24dp.svg"
 
 
 const Weather = () => {
-    const [weatherLoaded, setWeatherLoaded] = useState(false);
+    const {weatherToggled, setLocationDisabled} = useAuth();
     const [weatherData, setWeatherData] = useState(null);
     const date = new Date()
 
     useEffect(() => {
-        getWeather()
-    }, [])
+        weatherToggled && getWeather()
+    }, [weatherToggled])
 
     const getWeather = async() => {
-        const city = await fetchLocation()
-        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.REACT_APP_OPEN_WEATHER_API_KEY}&units=imperial`)
+        const location = await fetchLocation()
+        //if location services are blocked
+        if(location.denied) {
+            return;
+        }
+        //fetch weather api with city
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location.city}&appid=${process.env.REACT_APP_OPEN_WEATHER_API_KEY}&units=imperial`)
         .then(res => res.json())
         .then(data => {
             formatData(data)
@@ -25,7 +31,7 @@ const Weather = () => {
     }
 
     const formatData = (data) => {
-        console.log(data)
+        console.log("WEATHER DATA", data)
         const description = capitalizeFirstLetter(data.weather[0].description);
         const temperature = Math.trunc(data.main.temp);
         const city = data.name;
@@ -35,7 +41,6 @@ const Weather = () => {
             city: city
         }
         setWeatherData(formattedData)
-        setWeatherLoaded(true)
     }
 
     function capitalizeFirstLetter(string) {
@@ -44,12 +49,18 @@ const Weather = () => {
     
     const fetchLocation = async () => {
         const coords = await getCoords()
+        //if user has location services blocked
+        if(coords.denied) {
+            return coords;
+        }
+        // set cords in local storage
         const localWeatherData = JSON.parse(localStorage.getItem("weather"));
         const updatedWeatherData = {
             ...localWeatherData,
             coords: coords
         }
         localStorage.setItem("weather", JSON.stringify(updatedWeatherData));
+        //fetch city with coords
         return await getCity(coords);
     }
     
@@ -57,12 +68,30 @@ const Weather = () => {
         return new Promise(function(resolve) {
             navigator.geolocation.getCurrentPosition(function(position) {
                 if(position) {
+                    //set coords in local storage
+                    const localWeatherData = JSON.parse(localStorage.getItem("weather"));
+                    const updatedWeatherData = {
+                        ...localWeatherData,
+                        locationServices: true
+                    }
+                    localStorage.setItem("weather", JSON.stringify(updatedWeatherData))
+                    setLocationDisabled(false);
+                    //resolve promise w/ coords
                     resolve({longitude: position.coords.longitude, latitude: position.coords.latitude})
                 }
             // if user denied geolocation services
             }, function(error) {
                 if(error.code === error.PERMISSION_DENIED) {
-                    console.log(error)
+                    // set location disabled in local storage
+                    const localWeatherData = JSON.parse(localStorage.getItem("weather"));
+                    const updatedWeatherData = {
+                        ...localWeatherData,
+                        locationServices: false
+                    }
+                    localStorage.setItem("weather", JSON.stringify(updatedWeatherData))
+                    setLocationDisabled(true);
+                    //resolve promise w/ error
+                    resolve({denied: true, error: error});
                 }
             })
         })
@@ -70,12 +99,12 @@ const Weather = () => {
     
     const getCity = async(position) => {
         return new Promise(function(resolve) {
-            // save loading time by checking local storage for stored city
+            // check local storage for stored city
             const localWeatherData = JSON.parse(localStorage.getItem("weather"));
-            if(localWeatherData.coords) {
+            if(localWeatherData.coords && localWeatherData.city) {
                 //if user hasn't changed their location
                 if(localWeatherData.coords.longitude === position.longitude && localWeatherData.coords.latitude === position.latitude) {
-                    resolve(localWeatherData.city);
+                    resolve({city: localWeatherData.city});
                     return;
                 }
             }
@@ -84,18 +113,20 @@ const Weather = () => {
             .then((res => res.json()))
             .then(data => {
                 const city = data.address.city;
+                // set city in local storage
                 const localWeatherData = JSON.parse(localStorage.getItem("weather"));
                 const updatedWeather = {
                     ...localWeatherData,
                     city: city
                 }
                 localStorage.setItem("weather", JSON.stringify(updatedWeather));
-                resolve(city)
+                //resolve promise with city
+                resolve({city: city})
             })
         })
     }
 
-    return weatherLoaded && weatherData && ( 
+    return weatherData && weatherToggled && ( 
         <div className="content-weather">
             <span className="content-weather-description">
                 <SunnyIcon/>

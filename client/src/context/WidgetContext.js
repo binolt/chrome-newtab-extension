@@ -7,11 +7,30 @@ export function useAuth() {
 }
 
 export function AuthProvider({children}) {
-    const testFunction = () => {
-        console.log("TESTING")
+    const [weatherToggled, setWeatherToggled] = useState(false);
+    const [locationDisabled, setLocationDisabled] = useState(false);
+
+    const fetchWeatherInfo = () => {
+        const localWeatherData = JSON.parse(localStorage.getItem("weather"))
+        if(localWeatherData) {
+            localWeatherData.weatherServices && setWeatherToggled(true);
+            if(!localWeatherData.locationServices) {
+                setLocationDisabled(true)
+            }
+        }
     }
+
+    useEffect(() => {
+        fetchWeatherInfo()
+    }, [])
+
+
+
     const value = {
-        testFunction
+        weatherToggled,
+        setWeatherToggled,
+        locationDisabled, 
+        setLocationDisabled
     }
     return (
         <AuthContext.Provider value={value}>
