@@ -2,51 +2,39 @@ import React, { useEffect, useState } from "react";
 import Column from "./column";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
-import boardService from "../../services/BoardService";
-import { useAuth } from "../../context/AuthContext";
 
 const Container = styled.div`
   display: flex;
 `;
 
+const defaultColumnData = {
+  columnOrder: ["column-1", "column-2", "column-3"],
+  title: "default column",
+  columns: {
+    "column-1": {id: "column-1", title: "to-do", taskIds: ["task-1"]},
+    "column-2": {id: "column-2", title: "in progress", taskIds: []},
+    "column-3": {id: "column-3", title: "done", taskIds: []}
+  },
+  tasks: {
+    "task-1": {id: "task-1", content: "Welcome to your board!", isNew: false}
+  },
+  createdOn: new Date (),
+  bid: 55682
+}
+
 const TodoList = (props) => {
-  const [columnData, setColumnData] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const { currentUser } = useAuth();
+  const [columnData, setColumnData] = useState(defaultColumnData);
 
   useEffect(() => {
-    const fetchBoard = async () => {
-      //if user
-      if (currentUser) {
-        //get id from pathname
-        let bid = props.history.location.pathname;
-        bid = bid.replace("/boards/", "");
+    fetchBoard()
+  }, [])
 
-        //fetch board from localStorage
-        const localData = JSON.parse(localStorage.getItem(`board/${bid}`));
-        if (localData) {
-          setColumnData(localData);
-          setIsLoaded(true);
-          return;
-        }
+  const fetchBoard = () => {
+    const board = JSON.parse(localStorage.getItem("board/55682"));
+    board && setColumnData(board);
+  }
 
-        //fetch board from db
-        const data = await boardService.fetchBoard(currentUser.uid, bid);
-        if (!data.message.msgError) {
-          localStorage.setItem(`board/${bid}`, JSON.stringify(data.board));
-          setColumnData(data.board);
-          setIsLoaded(true);
-        } else {
-          props.history.push("/");
-        }
 
-        //if no user
-      } else {
-        props.history.push("/");
-      }
-    };
-    fetchBoard();
-  }, [currentUser, props.history]);
 
   const syncData = (updatedBoard) => {
     setColumnData(updatedBoard);
@@ -54,7 +42,6 @@ const TodoList = (props) => {
       `board/${updatedBoard.bid}`,
       JSON.stringify(updatedBoard)
     );
-    boardService.updateBoard(updatedBoard, updatedBoard.bid);
   };
 
   const updateTask = (task) => {
@@ -220,7 +207,7 @@ const TodoList = (props) => {
     syncData(updatedBoard);
   };
   return (
-    isLoaded && (
+     (
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable
           droppableId="all-columns"

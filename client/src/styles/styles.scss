@@ -1,4 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500&display=swap');
+@import "_weather.scss";
+@import "_landing.scss";
+@import "_menu.scss";
+@import "./todo-list/_column.scss";
+@import "./todo-list/_task.scss";
+
 
 body, h1, h2, h3, h4, h5, h6, p, button, input {
     font-family: 'Inter', sans-serif;

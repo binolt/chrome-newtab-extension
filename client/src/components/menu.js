@@ -2,10 +2,7 @@ import React, { useEffect, useState, useContext, useRef } from 'react';
 import SideMenu from "./side-menu"
 import UnsplashMenu from './background-menus/unsplash-menu';
 import MenuItem from "./menu-item";
-import "../css/menu/menu.css"
 import MainMenu from "./main-menu";
-
-
 
 import {ReactComponent as ProfileIcon} from "../icons/settings/people_alt-black-48dp.svg"
 import {ReactComponent as ImageIcon} from "../icons/settings/image-black-48dp.svg"

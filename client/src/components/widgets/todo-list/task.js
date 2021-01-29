@@ -2,18 +2,17 @@ import React, { useEffect, useRef, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { CSSTransition } from "react-transition-group";
 import TextareaAutosize from "react-textarea-autosize";
-import "../../../css/todo-list/task/task.css"
 
 
 //FUNCTIONS
-import useOnClickOutside from "../../Functions/click-outside";
-import useKeyPress from "../../Functions/key-press";
+import useOnClickOutside from "../../../functions/click-outside"
+import useKeyPress from "../../../functions/key-press"
 
 //ICONS
-import { ReactComponent as MenuIcon } from "../../icons/more_vert-black-24dp.svg";
-import { ReactComponent as EditIcon } from "../../icons/edit-black-24dp.svg";
-import { ReactComponent as TrashIcon } from "../../icons/delete-black-24dp.svg";
-import { ReactComponent as CopyIcon } from "../../icons/file_copy-black-24dp.svg";
+import { ReactComponent as MenuIcon } from "../../../icons/menu-black-24dp.svg";
+import { ReactComponent as EditIcon } from "../../../icons/menu-black-24dp.svg";
+import { ReactComponent as TrashIcon } from "../../../icons/menu-black-24dp.svg";
+import { ReactComponent as CopyIcon } from "../../../icons/menu-black-24dp.svg";
 
 const Task = (props) => {
   const [menuOpen, setMenuOpen] = useState(false);

@@ -1,5 +1,4 @@
 import React from "react";
-import "../../../css/todo-list/column/column.css"
 import Task from "./task";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import { ReactComponent as PlusIcon } from "../../../icons/add-black-24dp.svg"

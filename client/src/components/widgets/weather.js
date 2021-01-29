@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import "../../css/weather/weather.css"
 import Moment from "react-moment";
 import { useAuth } from '../../context/WidgetContext';
 
@@ -33,13 +32,16 @@ const Weather = () => {
 
 
     const formatData = (data) => {
+        console.log(data)
         const desc = capitalizeFirstLetter(data.weather[0].description);
         const temp = Math.trunc(data.main.temp);
         const city = data.name;
+        const icon = data.weather[0].icon;
         const formattedData = {
             description: desc,
             temperature: temp,
-            city: city
+            city: city,
+            icon: icon
         }
         setWeatherData(formattedData)
     }
@@ -129,7 +131,8 @@ const Weather = () => {
 
     return weatherData && weatherToggled && ( 
         <div className="content-weather">
-            <span className="content-weather-description">
+            <img src={`http://openweathermap.org/img/wn/${weatherData.icon}@2x.png`}/>
+            {/* <span className="content-weather-description">
                 <SunnyIcon/>
                 <p>{weatherData.description}</p>
             </span>
@@ -137,7 +140,7 @@ const Weather = () => {
                 <h1>{weatherData.temperature}°</h1>
                 <p>{weatherData.city}</p>
             </span>
-            <Moment className="content-weather-date" format="ddd" date={date}/>
+            <Moment className="content-weather-date" format="ddd" date={date}/> */}
         </div>
      );
 }

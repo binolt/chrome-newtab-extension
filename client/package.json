@@ -16,8 +16,10 @@
     "react-moment": "^1.1.1",
     "react-scripts": "4.0.1",
     "react-spinners": "^0.10.4",
+    "react-textarea-autosize": "^8.3.0",
     "react-toggle": "^4.1.1",
     "react-transition-group": "^4.4.1",
+    "styled-components": "^5.2.1",
     "unsplash-js": "^7.0.2",
     "uuid": "^8.3.2",
     "web-vitals": "^0.2.4"

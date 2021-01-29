@@ -9,6 +9,7 @@ import {ReactComponent as MenuIcon} from "../icons/menu-black-24dp.svg";
 import {ReactComponent as Search} from "../icons/search-black-24dp.svg" 
 import {ReactComponent as Google} from "../icons/google-icon.svg" 
 import {ReactComponent as CloseIcon} from "../icons/settings/close-black-48dp.svg"
+import TodoList from './widgets/todo-list/todo-list';
 
 const DEFAULT_BACKGROUND = "https://res.cloudinary.com/dxqmbhsis/image/upload/v1610226492/clouds_background_pkxdke.jpg"
 
@@ -44,11 +45,9 @@ const Landing = () => {
   
     return ( 
         <div className="app" style={{backgroundImage: `url(${backgroundImage})`, opacity: loaded ? 1 : 0}}>
-        <div className="app-container">
-          <a rel="noreferrer" className="content-square" href="https://www.youtube.com/" target="_blank">
-            <div className="arrow-right"/>
-          </a>
-        </div>
+        {/* <div className="app-container">
+
+        </div> */}
         <div className="content-search">
           <span className="content-search-head">
           <Google className="content-icons-google"/>
@@ -61,6 +60,7 @@ const Landing = () => {
           </form>
         </div>
         <Weather/>
+        <TodoList/>
         <div className="content-menu-placeholder" onClick={() => setModalIsOpen(!modalIsOpen)}>
           <MenuIcon/>
         </div>
