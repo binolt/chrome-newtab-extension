@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import Moment from "react-moment";
 import { useAuth } from '../../../context/WidgetContext';
 import weatherService from "../../../services/weather-service";
@@ -27,34 +27,6 @@ const Weather = () => {
         formatData(data)
     }
 
-    function setCharAt(str,index,chr) {
-        if(index > str.length-1) return str;
-        return str.substring(0,index) + chr + str.substring(index+1);
-    }
-
-
-    const formatData = (data) => {
-        console.log(data)
-        const desc = capitalizeFirstLetter(data.weather[0].description);
-        const temp = Math.trunc(data.main.temp);
-        const city = data.name;
-        let icon = data.weather[0].icon;
-        if(icon.includes("n")) {
-            icon = setCharAt(icon, 2, 'd')
-        }
-        const formattedData = {
-            description: desc,
-            temperature: temp,
-            city: city,
-            icon: icon
-        }
-        setWeatherData(formattedData)
-    }
-
-    function capitalizeFirstLetter(string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    }
-    
     const fetchLocation = async () => {
         const coords = await getCoords()
         //if user has location services blocked
@@ -71,6 +43,7 @@ const Weather = () => {
         //fetch city with coords
         return await getCity(coords);
     }
+
     
     const getCoords = async() => {
         return new Promise(function(resolve) {
@@ -105,19 +78,19 @@ const Weather = () => {
         })
     }
     
-    const getCity = async(position) => {
+    const getCity = async({longitude, latitude}) => {
         return new Promise(function (resolve) {
             // check local storage for stored city
             const localWeatherData = JSON.parse(localStorage.getItem("weather"));
             if(localWeatherData.coords && localWeatherData.city) {
                 //if user hasn't changed their location
-                if(localWeatherData.coords.longitude === position.longitude && localWeatherData.coords.latitude === position.latitude) {
+                if(localWeatherData.coords.longitude === longitude && localWeatherData.coords.latitude === latitude) {
                     resolve({city: localWeatherData.city});
                     return;
                 }
             }
             // if no local storage data, fetch city from api
-            weatherService.fetchCity(position.latitude, position.longitude)
+            weatherService.fetchCity(latitude, longitude)
             .then(data => {
                 const city = data.address.city;
                 // set city in local storage
@@ -133,13 +106,41 @@ const Weather = () => {
         })
     }
 
+    const formatData = (data) => {
+        console.log(data)
+        const desc = capitalizeFirstLetter(data.weather[0].description);
+        const temp = Math.trunc(data.main.temp);
+        const city = data.name;
+        let icon = data.weather[0].icon;
+        if(icon.includes("n")) {
+            icon = setCharAt(icon, 2, 'd')
+        }
+        const formattedData = {
+            description: desc,
+            temperature: temp,
+            city: city,
+            icon: icon
+        }
+        setWeatherData(formattedData)
+    }
+
+    //QOL FUNCTIONS
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    function setCharAt(str,index,chr) {
+        if(index > str.length-1) return str;
+        return str.substring(0,index) + chr + str.substring(index+1);
+    }
+
     return weatherData && weatherToggled && ( 
         <div className="content-weather">
-            <WeatherIcon name={weatherData.icon}/>
             <span>
-            <h1>{weatherData.temperature}°</h1>
-            <p>{weatherData.description}</p>
+                <WeatherIcon name={weatherData.icon}/>
+                <h1>{weatherData.temperature}°</h1>
             </span>
+            <p>{weatherData.description}</p>
             {/* <span className="content-weather-description">
                 <SunnyIcon/>
                 <p>{weatherData.description}</p>
