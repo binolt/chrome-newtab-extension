@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Moment from "react-moment";
 import { useAuth } from '../../context/WidgetContext';
 
 //ICONS
-import {ReactComponent as SunnyIcon} from "../../icons/weather/wb_sunny-black-24dp.svg"
 
 
 const Weather = () => {
@@ -30,13 +29,21 @@ const Weather = () => {
         })
     }
 
+    function setCharAt(str,index,chr) {
+        if(index > str.length-1) return str;
+        return str.substring(0,index) + chr + str.substring(index+1);
+    }
+
 
     const formatData = (data) => {
         console.log(data)
         const desc = capitalizeFirstLetter(data.weather[0].description);
         const temp = Math.trunc(data.main.temp);
         const city = data.name;
-        const icon = data.weather[0].icon;
+        let icon = data.weather[0].icon;
+        if(icon.includes("n")) {
+            icon = setCharAt(icon, 2, 'd')
+        }
         const formattedData = {
             description: desc,
             temperature: temp,
@@ -131,7 +138,11 @@ const Weather = () => {
 
     return weatherData && weatherToggled && ( 
         <div className="content-weather">
-            <img src={`http://openweathermap.org/img/wn/${weatherData.icon}@2x.png`}/>
+            <WeatherIcon name={weatherData.icon}/>
+            <span>
+            <h1>{weatherData.temperature}°</h1>
+            <p>{weatherData.description}</p>
+            </span>
             {/* <span className="content-weather-description">
                 <SunnyIcon/>
                 <p>{weatherData.description}</p>
@@ -146,3 +157,32 @@ const Weather = () => {
 }
  
 export default Weather;
+
+
+const WeatherIcon = ({name}) => {
+    const ImportedIconRef = useRef(null);
+    const [loading, setLoading] = useState(false);
+  
+    useEffect(() => {
+      setLoading(true);
+      const importIcon = async () => {
+        try {
+            ImportedIconRef.current = (await import(`!!@svgr/webpack?-svgo,+titleProp,+ref!../../icons/weather/${name}.svg`)).default;
+        } catch (err) {
+          // Your own error handling logic, throwing error for the sake of
+          // simplicity
+          throw err;
+        } finally {
+          setLoading(false);
+        }
+      };
+      importIcon();
+    }, [name]);
+  
+    if (!loading && ImportedIconRef.current) {
+      const { current: ImportedIcon } = ImportedIconRef;
+      return <ImportedIcon />;
+    }
+  
+    return null;
+}

@@ -9,7 +9,6 @@ import {ReactComponent as MenuIcon} from "../icons/menu-black-24dp.svg";
 import {ReactComponent as Search} from "../icons/search-black-24dp.svg" 
 import {ReactComponent as Google} from "../icons/google-icon.svg" 
 import {ReactComponent as CloseIcon} from "../icons/settings/close-black-48dp.svg"
-import TodoList from './widgets/todo-list/todo-list';
 
 const DEFAULT_BACKGROUND = "https://res.cloudinary.com/dxqmbhsis/image/upload/v1610226492/clouds_background_pkxdke.jpg"
 
@@ -60,7 +59,6 @@ const Landing = () => {
           </form>
         </div>
         <Weather/>
-        <TodoList/>
         <div className="content-menu-placeholder" onClick={() => setModalIsOpen(!modalIsOpen)}>
           <MenuIcon/>
         </div>
