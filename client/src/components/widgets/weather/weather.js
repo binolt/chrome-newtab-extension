@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import Moment from "react-moment";
-import { useAuth } from '../../context/WidgetContext';
+import { useAuth } from '../../../context/WidgetContext';
+import weatherService from "../../../services/weather-service";
+import WeatherIcon from './weather-icon';
 
 //ICONS
 
@@ -8,7 +10,6 @@ import { useAuth } from '../../context/WidgetContext';
 const Weather = () => {
     const {weatherToggled, setLocationDisabled} = useAuth();
     const [weatherData, setWeatherData] = useState(null);
-    const date = new Date()
 
 
     useEffect(() => { 
@@ -22,11 +23,8 @@ const Weather = () => {
             return;
         }
         //fetch weather api with city
-        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location.city}&appid=${process.env.REACT_APP_OPEN_WEATHER_API_KEY}&units=imperial`)
-        .then(res => res.json())
-        .then(data => {
-            formatData(data)
-        })
+        const data = await weatherService.fetchWeather(location.city);
+        formatData(data)
     }
 
     function setCharAt(str,index,chr) {
@@ -108,7 +106,7 @@ const Weather = () => {
     }
     
     const getCity = async(position) => {
-        return new Promise(function(resolve) {
+        return new Promise(function (resolve) {
             // check local storage for stored city
             const localWeatherData = JSON.parse(localStorage.getItem("weather"));
             if(localWeatherData.coords && localWeatherData.city) {
@@ -119,8 +117,7 @@ const Weather = () => {
                 }
             }
             // if no local storage data, fetch city from api
-            fetch(`https://us1.locationiq.com/v1/reverse.php?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&lat=${position.latitude}&lon=${position.longitude}&format=json`)
-            .then((res => res.json()))
+            weatherService.fetchCity(position.latitude, position.longitude)
             .then(data => {
                 const city = data.address.city;
                 // set city in local storage
@@ -157,32 +154,3 @@ const Weather = () => {
 }
  
 export default Weather;
-
-
-const WeatherIcon = ({name}) => {
-    const ImportedIconRef = useRef(null);
-    const [loading, setLoading] = useState(false);
-  
-    useEffect(() => {
-      setLoading(true);
-      const importIcon = async () => {
-        try {
-            ImportedIconRef.current = (await import(`!!@svgr/webpack?-svgo,+titleProp,+ref!../../icons/weather/${name}.svg`)).default;
-        } catch (err) {
-          // Your own error handling logic, throwing error for the sake of
-          // simplicity
-          throw err;
-        } finally {
-          setLoading(false);
-        }
-      };
-      importIcon();
-    }, [name]);
-  
-    if (!loading && ImportedIconRef.current) {
-      const { current: ImportedIcon } = ImportedIconRef;
-      return <ImportedIcon />;
-    }
-  
-    return null;
-}

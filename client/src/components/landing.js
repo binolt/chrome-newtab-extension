@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Modal from 'react-modal';
 import Menu from "../components/menu"
-import Weather from '../components/widgets/weather';
+import Weather from './widgets/weather/weather';
 import Moment from "react-moment"
 
 //ICONS
