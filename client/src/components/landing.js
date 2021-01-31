@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import Menu from "../components/menu"
 import Weather from './widgets/weather/weather';
 import Moment from "react-moment"
+import {auth, useAuth} from "../context/global-context";
 
 //ICONS
 import {ReactComponent as MenuIcon} from "../icons/menu-black-24dp.svg"; 
@@ -10,26 +11,15 @@ import {ReactComponent as Search} from "../icons/search-black-24dp.svg"
 import {ReactComponent as Google} from "../icons/google-icon.svg" 
 import {ReactComponent as CloseIcon} from "../icons/settings/close-black-48dp.svg"
 
-const DEFAULT_BACKGROUND = "https://res.cloudinary.com/dxqmbhsis/image/upload/v1610226492/clouds_background_pkxdke.jpg"
-
 const Landing = () => {
+    //global state
+    const {loaded, backgroundImage, setBackgroundImage} = useAuth()
+    //local state
     const [date, setDate] = useState(new Date());
     const [modalIsOpen, setModalIsOpen] = useState(false);
-    const [backgroundImage, setBackgroundImage] = useState("")
-    const [loaded, setLoaded] = useState(false);
-  
-    const preload = () => {
-      const background = localStorage.getItem("backgroundImg")
-      const img = new Image()
-      img.src = background ? background : DEFAULT_BACKGROUND;
-      img.onload = () => {
-        setBackgroundImage(img.src)
-        setLoaded(true)
-      }
-    }
+
     
     useEffect(() => {
-        preload()
         setInterval(() => {
             setDate(new Date())
         }, 1000);

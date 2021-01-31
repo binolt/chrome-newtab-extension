@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Moment from "react-moment";
-import { useAuth } from '../../../context/WidgetContext';
+import { useAuth } from '../../../context/global-context';
 import weatherService from "../../../services/weather-service";
 import WeatherIcon from './weather-icon';
 

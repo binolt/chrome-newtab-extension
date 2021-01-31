@@ -1,7 +1,7 @@
 import React from 'react';
 import Toggle from "react-toggle";
 import "react-toggle/style.css"
-import { useAuth } from '../context/WidgetContext';
+import { useAuth } from '../context/global-context';
 
 const WeatherMenu = () => {
     const {weatherToggled, setWeatherToggled, locationDisabled} = useAuth();

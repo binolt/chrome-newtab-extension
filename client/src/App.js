@@ -1,5 +1,5 @@
 import React from 'react';
-import { AuthProvider } from './context/WidgetContext';
+import { AuthProvider } from "./context/global-context";
 import Landing from './components/landing';
 
 const App = () => {
