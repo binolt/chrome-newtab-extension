@@ -107,7 +107,6 @@ const Weather = () => {
     }
 
     const formatData = (data) => {
-        console.log(data)
         const desc = capitalizeFirstLetter(data.weather[0].description);
         const temp = Math.trunc(data.main.temp);
         const city = data.name;

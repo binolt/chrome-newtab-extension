@@ -1,0 +1,22 @@
+.modal-overlay {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.default-modal {
+    width: 450px;
+    height: 250px;
+    background-color: orange;
+}
+
+
+.modal-content {
+    position: relative;
+    width: inherit;
+    height: inherit;
+}

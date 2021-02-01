@@ -1,15 +1,16 @@
-import React, {useState, useEffect} from 'react';
-import Modal from 'react-modal';
-import Menu from "../components/menu"
+import React, {useState, useEffect, useRef} from 'react';
+import Menu from "../components/menu/menu"
 import Weather from './widgets/weather/weather';
 import Moment from "react-moment"
 import {useAuth} from "../context/global-context";
+import Modal from './modal';
 
 //ICONS
 import {ReactComponent as MenuIcon} from "../icons/menu-black-24dp.svg"; 
 import {ReactComponent as Search} from "../icons/search-black-24dp.svg" 
 import {ReactComponent as Google} from "../icons/google-icon.svg" 
-import {ReactComponent as CloseIcon} from "../icons/settings/close-black-48dp.svg"
+import { MenuProvider } from '../context/menu-context';
+// import {ReactComponent as CloseIcon} from "../icons/settings/close-black-48dp.svg"
 
 const Landing = () => {
     //global state
@@ -31,6 +32,14 @@ const Landing = () => {
         localStorage.setItem("backgroundImg", img.urls.full);
         setBackgroundImage(img.urls.full)
     }
+
+    const closeModal = () => {
+      setModalIsOpen(false);
+    }
+
+    const openModal = () => {
+      setModalIsOpen(true)
+    }
   
     return ( 
         <div className="app" style={{backgroundImage: `url(${backgroundImage})`, opacity: loaded ? 1 : 0}}>
@@ -49,12 +58,17 @@ const Landing = () => {
           </form>
         </div>
         <Weather/>
-        <div className="content-menu-placeholder" onClick={() => setModalIsOpen(!modalIsOpen)}>
+        <div className="content-menu-placeholder" onClick={openModal}>
           <MenuIcon/>
         </div>
-        <Modal closeTimeoutMS={250} className="menu-modal" overlayClassName="menu-overlay" onRequestClose={() => setModalIsOpen(false)} isOpen={modalIsOpen} contentLabel="modal">
+        {/* <Modal closeTimeoutMS={250} className="menu-modal" overlayClassName="menu-overlay" onRequestClose={() => setModalIsOpen(false)} isOpen={modalIsOpen} contentLabel="modal">
             <Menu changeImage={changeImage}/>
             <CloseIcon className="menu-close" onClick={() => setModalIsOpen(false)}/>
+        </Modal> */}
+        <Modal className="menu-modal" overlayClassname="menu-modal-overlay" isOpen={modalIsOpen} onRequestClose={closeModal}>
+          <MenuProvider>
+          <Menu/>
+          </MenuProvider>
         </Modal>
         <div className="content-time">
           <Moment format="h:mm" className="content-time-clock">
