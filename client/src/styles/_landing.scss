@@ -134,13 +134,22 @@
 
 .content-time {
     position: absolute;
-    user-select: none;
-    bottom: 1.5rem;
-    font-size: 4em;
-    font-weight: 100;
+    bottom: 2rem;
     color: #fff;
     text-shadow: 1px 2px 5px #00000042;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     font-family: "Roboto";
+    .content-time-clock {
+        font-size: 7em;
+        font-weight: 300;
+    }
+    .content-time-date {
+        margin-top: -.75rem;
+        font-size: 1.8em;
+        font-weight: 100;
+    }
 }
 
 

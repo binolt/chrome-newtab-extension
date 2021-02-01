@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import Menu from "../components/menu"
 import Weather from './widgets/weather/weather';
 import Moment from "react-moment"
-import {auth, useAuth} from "../context/global-context";
+import {useAuth} from "../context/global-context";
 
 //ICONS
 import {ReactComponent as MenuIcon} from "../icons/menu-black-24dp.svg"; 
@@ -57,7 +57,10 @@ const Landing = () => {
             <CloseIcon className="menu-close" onClick={() => setModalIsOpen(false)}/>
         </Modal>
         <div className="content-time">
-          <Moment format="h:mm">
+          <Moment format="h:mm" className="content-time-clock">
+            {date}
+          </Moment>
+          <Moment format="dddd, MMMM DD" className="content-time-date">
             {date}
           </Moment>
         </div>

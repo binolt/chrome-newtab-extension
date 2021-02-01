@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { createApi } from 'unsplash-js';
 import GridLoader from "react-spinners/GridLoader";
 import { css } from "@emotion/core";
@@ -35,12 +35,25 @@ const UnsplashMenu = (props) => {
   const [query, setQuery] = useState("");
   const [imagesLoaded, setImagesLoaded] = useState(false);
 
+  useEffect(() => {
+    const test = async() => {
+      const data = await unsplash.search.getPhotos({
+        featured: true,
+        orientation: 'landscape',
+        query: "wallpapers"
+      })
+      console.log(data)
+    }
+    test()
+  }, [])
+
 
   const fetchImages = async(query) => {
     const data = await unsplash.search.getPhotos({
-      query: query,
+      query: "wallpapers",
       perPage:12,
       orientation: 'landscape',
+      featured: true
     });
     const imgs = data.response.results;
     await cacheImages(imgs)
