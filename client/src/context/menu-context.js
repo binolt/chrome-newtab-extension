@@ -7,7 +7,8 @@ export function useAuth() {
 }
 
 export function MenuProvider({children}) {
-    const [menu, setMenu] = useState('Profile');
+    const [menu, setMenu] = useState('Background Image');
+    const [backgroundMenu, setBackgroundMenu] = useState("Main");
 
     useEffect(() => {
     }, [])
@@ -16,7 +17,9 @@ export function MenuProvider({children}) {
 
     const value = {
         menu, 
-        setMenu
+        setMenu,
+        backgroundMenu,
+        setBackgroundMenu
     }
     return (
         <AuthContext.Provider value={value}>

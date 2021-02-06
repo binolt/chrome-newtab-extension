@@ -5,8 +5,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 100;
+    z-index: 20;
+    top: 0;
 }
+
 
 .default-modal {
     width: 450px;
@@ -14,9 +16,56 @@
     background-color: orange;
 }
 
+.modal-wrapper {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
 
 .modal-content {
     position: relative;
     width: inherit;
     height: inherit;
+}
+
+
+//modal transition classes
+.menu-modal-primary-enter {
+    opacity: 0;
+    position: absolute;
+    transform: translateY(1rem);
+}
+.menu-modal-primary-enter-active {
+    transform: translateY(0rem);
+    opacity: 1;
+    transition: all 400ms ease;
+}
+.menu-modal-primary-exit {
+    opacity: 1;
+}
+.menu-modal-primary-exit-active {
+    opacity: 0;
+    transition: opacity 400ms ease;
+}
+
+//modal overlay transition classes
+.menu-modal-overlay-primary-enter {
+opacity: 0;
+}
+.menu-modal-overlay-primary-enter-active {
+opacity: 1;
+transition: all 350ms ease;
+}
+.menu-modal-overlay-primary-exit {
+opacity: 1;
+}
+.menu-modal-overlay-primary-exit-active {
+opacity: 0;
+transition: opacity 350ms;
 }
