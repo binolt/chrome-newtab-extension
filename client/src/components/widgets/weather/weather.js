@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Moment from "react-moment";
-import { useAuth } from '../../../context/global-context';
+import { useGlobalAuth } from '../../../context/global-context';
 import weatherService from "../../../services/weather-service";
 import WeatherIcon from './weather-icon';
 
@@ -8,7 +8,7 @@ import WeatherIcon from './weather-icon';
 
 
 const Weather = () => {
-    const {weatherToggled, setLocationDisabled} = useAuth();
+    const {weatherToggled, setLocationDisabled} = useGlobalAuth();
     const [weatherData, setWeatherData] = useState(null);
 
 

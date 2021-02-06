@@ -1010,22 +1010,22 @@
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
-  padding: .5rem;
+  padding: 0.5rem;
   cursor: pointer;
   background-size: cover;
 }
 
 .menu-background .menu-background-card h6 {
   font-weight: 500;
-  font-size: .75em;
-  margin-bottom: .25rem;
+  font-size: 0.75em;
+  margin-bottom: 0.25rem;
   color: #fff;
   z-index: 1;
 }
 
 .menu-background .menu-background-card p {
   z-index: 1;
-  font-size: .6em;
+  font-size: 0.6em;
   color: #767676;
 }
 
@@ -1044,6 +1044,7 @@
 .menu-background-side {
   width: 100%;
   height: 100%;
+  overflow-y: scroll;
 }
 
 .menu-background-side .menu-background-side-header {
@@ -1113,8 +1114,27 @@
   cursor: pointer;
 }
 
-body, h1, h2, h3, h4, h5, h6, p, button, input, textarea {
-  font-family: 'Inter', sans-serif;
+.m-upload-wrapper {
+  height: 1000px;
+}
+
+.m-upload-wrapper img {
+  width: 50px;
+  height: 50px;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+button,
+input,
+textarea {
+  font-family: "Inter", sans-serif;
   margin: 0;
 }
 

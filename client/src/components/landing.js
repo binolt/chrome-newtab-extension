@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef} from 'react';
 import Menu from "../components/menu/menu"
 import Weather from './widgets/weather/weather';
 import Moment from "react-moment"
-import {useAuth} from "../context/global-context";
+import {useGlobalAuth} from "../context/global-context";
 import Modal from './modal';
 
 //ICONS
@@ -14,7 +14,7 @@ import { MenuProvider } from '../context/menu-context';
 
 const Landing = () => {
     //global state
-    const {loaded, backgroundImage, setBackgroundImage} = useAuth()
+    const {loaded, backgroundImage, setBackgroundImage} = useGlobalAuth()
     //local state
     const [date, setDate] = useState(new Date());
     const [modalIsOpen, setModalIsOpen] = useState(false);

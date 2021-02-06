@@ -5,7 +5,7 @@ const DEFAULT_BACKGROUND = "https://res.cloudinary.com/dxqmbhsis/image/upload/v1
 
 const AuthContext = React.createContext();
 
-export function useAuth() {
+export function useGlobalAuth() {
     return useContext(AuthContext);
 }
 

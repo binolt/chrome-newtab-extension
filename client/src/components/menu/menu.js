@@ -14,6 +14,7 @@ import {ReactComponent as ChevronLeft} from "../../icons/chevron_left-black-48dp
 
 import bg from "../../images/VYOsxOY.jpg";
 import FeaturedBackgrounds from '../background-menus/featured-backgrounds';
+import UploadMenu from '../background-menus/upload-menu';
 
 const optionsData = [
     {header: "Main", title: "Main"},
@@ -31,7 +32,7 @@ const optionsData = [
 const backgroundMenuData = [
     {title: "Featured", desc: "View featured backgrounds to make your homepage pop", img: "https://images.unsplash.com/photo-1611465577672-8fc7be1dc826?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"},
     {title: "Upload", desc: "Upload your own custom images", img: "https://images.unsplash.com/photo-1518965539400-77d851d65c43?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=633&q=80"},
-    {title: "Favorite", desc: "View all of your favorited backgrounds", img: "https://images.unsplash.com/photo-1517191434949-5e90cd67d2b6?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80"},
+    {title: "Favorited", desc: "View all of your favorited backgrounds", img: "https://images.unsplash.com/photo-1517191434949-5e90cd67d2b6?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80"},
     {title: "Unsplash", desc: "Browse the Unsplash library for high-quality backgrounds", img: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80"},
 ]
 
@@ -128,6 +129,13 @@ const BackgroundMenu = () => {
             })}
             <SideBackgroundMenu title="Featured">
                 <FeaturedBackgrounds/>
+            </SideBackgroundMenu>
+            <SideBackgroundMenu title="Upload">
+                <UploadMenu/>
+            </SideBackgroundMenu>
+            <SideBackgroundMenu title="Favorited">
+            </SideBackgroundMenu>
+            <SideBackgroundMenu title="Unsplash">
             </SideBackgroundMenu>
         </div>
     )

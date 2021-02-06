@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import { useAuth } from '../../context/menu-context';
 import { createApi } from 'unsplash-js';
+import { useGlobalAuth } from '../../context/global-context';
 
 const unsplash = createApi({
     accessKey: process.env.REACT_APP_UNSPLASH_API_KEY,
@@ -25,12 +26,15 @@ const FeaturedBackgrounds = () => {
         // test()
         // setLoaded(true)
         const test = async ( ) => {
-          const data = await unsplash.collections.get({
-            collectionId: 11624136
+          const data = await unsplash.collections.getPhotos({
+            collectionId: 11624136,
+            perPage: 20
           })
+          setImages(data.response.results);
           console.log(data)
         }
         test()
+        setLoaded(true)
       }, [])
     return backgroundMenu === "Featured" && ( 
         <div className="menu-background-featured-wrapper">
@@ -45,11 +49,17 @@ const FeaturedBackgrounds = () => {
 }
 
 const ImageItem = (img) => {
+  const {setBackgroundImage} = useGlobalAuth()
   const [spans, setSpans] = useState(0)
   const imageRef = useRef(null)
   useEffect(() => {
     imageRef.current.addEventListener("load", updateSpans);
   }, [])
+
+  const updateImage = (img) => {
+    localStorage.setItem("backgroundImg", img)
+    setBackgroundImage(img)
+  }
 
   const updateSpans = () => {
     const height = imageRef.current.clientHeight;
@@ -60,6 +70,7 @@ const ImageItem = (img) => {
   return (
     <div style={{gridRowEnd: `span ${spans}`}}>
     <img
+      onClick={() => updateImage(img.urls.full)}
       ref={imageRef}
       src={img.urls.small}
       alt={img.description}
