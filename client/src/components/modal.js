@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import useOnClickOutside from '../functions/click-outside';
-import {CSSTransition} from "react-transition-group";
+import TransitionContainer from './transition-container';
 
 const Modal = ({className, isOpen, onRequestClose, overlayClassname, children}) => {
     const modalRef = useRef(null);
@@ -21,18 +21,16 @@ const Modal = ({className, isOpen, onRequestClose, overlayClassname, children}) 
 
     return ( 
         <div>
-        <CSSTransition   in={modalOpen} unmountOnExit timeout={350} classNames="menu-modal-overlay-primary">
-        <div className={`${overlayClassname} modal-overlay`}/>
-        </CSSTransition>
-        <CSSTransition in={modalOpen} unmountOnExit timeout={400} classNames="menu-modal-primary">
-        <div className="modal-wrapper">
+        <TransitionContainer timeout={350} open={modalOpen} classNames="menu-modal-overlay-primary">
+            <div className={`${overlayClassname} modal-overlay`}/>
+        </TransitionContainer>
+        <TransitionContainer open={modalOpen} classNames="menu-modal-primary" timeout={350}>
         <div className={className ? `${className}` : "default-modal"} ref={modalRef}>
             <div className="modal-content">
                 {children}
             </div>
         </div>
-        </div>
-        </CSSTransition>
+        </TransitionContainer>
         </div>
      );
 }

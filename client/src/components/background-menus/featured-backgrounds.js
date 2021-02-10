@@ -15,16 +15,6 @@ const FeaturedBackgrounds = () => {
     const [images, setImages] = useState([])
     const [loaded, setLoaded] = useState(false)
     useEffect(() => {
-        // const test = async() => {
-        //   const data = await unsplash.search.getPhotos({
-        //     featured: true,
-        //     query: "wallpapers",
-        //     perPage: 20
-        //   })
-        //   setImages(data.response.results);
-        // }
-        // test()
-        // setLoaded(true)
         const test = async ( ) => {
           const data = await unsplash.collections.getPhotos({
             collectionId: 11624136,
@@ -53,6 +43,12 @@ const ImageItem = (img) => {
   const [spans, setSpans] = useState(0)
   const imageRef = useRef(null)
   useEffect(() => {
+    const updateSpans = () => {
+      const height = imageRef.current.clientHeight;
+      const spans = Math.ceil(height / 80);
+      setSpans(spans);
+      imageRef.current.removeEventListener("load", updateSpans)
+    }
     imageRef.current.addEventListener("load", updateSpans);
   }, [])
 
@@ -61,12 +57,6 @@ const ImageItem = (img) => {
     setBackgroundImage(img)
   }
 
-  const updateSpans = () => {
-    const height = imageRef.current.clientHeight;
-    const spans = Math.ceil(height / 80);
-    setSpans(spans);
-    imageRef.current.removeEventListener("load", updateSpans)
-  }
   return (
     <div style={{gridRowEnd: `span ${spans}`}}>
     <img

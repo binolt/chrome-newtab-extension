@@ -1,4 +1,13 @@
 $primaryText: #fff;
 $secondaryText: #767676;
-$primaryGradient: linear-gradient(180deg, rgba(7,202,195,1) 0%, rgba(0,255,162,1) 100%);
-$secondaryBackground:  #131313;
+$primaryGradient: linear-gradient(
+  180deg,
+  rgba(7, 202, 195, 1) 0%,
+  rgba(0, 255, 162, 1) 100%
+);
+$primaryGradientHover: linear-gradient(
+  180deg,
+  rgb(7, 156, 151) 0%,
+  rgb(10, 175, 114) 100%
+);
+$secondaryBackground: #131313;

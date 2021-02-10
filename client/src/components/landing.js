@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect} from 'react';
 import Menu from "../components/menu/menu"
 import Weather from './widgets/weather/weather';
 import Moment from "react-moment"
@@ -14,7 +14,7 @@ import { MenuProvider } from '../context/menu-context';
 
 const Landing = () => {
     //global state
-    const {loaded, backgroundImage, setBackgroundImage} = useGlobalAuth()
+    const {loaded, backgroundImage} = useGlobalAuth()
     //local state
     const [date, setDate] = useState(new Date());
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -28,10 +28,10 @@ const Landing = () => {
   
   
   
-    const changeImage = (img) => {
-        localStorage.setItem("backgroundImg", img.urls.full);
-        setBackgroundImage(img.urls.full)
-    }
+    // const changeImage = (img) => {
+    //     localStorage.setItem("backgroundImg", img.urls.full);
+    //     setBackgroundImage(img.urls.full)
+    // }
 
     const closeModal = () => {
       setModalIsOpen(false);

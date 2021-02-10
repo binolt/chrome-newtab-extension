@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {useAuth} from "../../context/menu-context";
 
 
@@ -143,8 +143,20 @@ const BackgroundMenu = () => {
 
 const BackgroundMenuCard = ({img, title, desc}) => {
     const {setBackgroundMenu} = useAuth();
+    const [loaded, setLoaded] = useState(false);
+
+    useEffect(() => {
+        const preload = () => {
+            let image = new Image();
+            image.src = img;
+            image.onload = function () {
+                setLoaded(true)
+            }
+        }
+        preload()
+    }, [img])
     return (
-        <div onClick={() => setBackgroundMenu(title)} className="menu-background-card" style={{backgroundImage: `url(${img})`}}>
+        <div onClick={() => setBackgroundMenu(title)} className="menu-background-card" style={{backgroundImage: `url(${img})`, opacity: loaded ? 1 : 0}}>
         <h6>{title}</h6>
         <p>{desc}</p>
     </div>

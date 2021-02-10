@@ -1,4 +1,4 @@
-export default {
+const WeatherService = {
       fetchCity: (lat, lon) => {
         return fetch(`https://us1.locationiq.com/v1/reverse.php?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&lat=${lat}&lon=${lon}&format=json`)
           .then((res) => res.json())
@@ -10,3 +10,5 @@ export default {
           .then((data) => data);
       },
 }
+
+export default WeatherService;
