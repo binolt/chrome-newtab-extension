@@ -15,6 +15,7 @@ import {ReactComponent as ChevronLeft} from "../../icons/chevron_left-black-48dp
 import bg from "../../images/VYOsxOY.jpg";
 import FeaturedBackgrounds from '../background-menus/featured-backgrounds';
 import UploadMenu from '../background-menus/upload-menu';
+import WeatherMenu from '../widgets/weather/weather-menu';
 
 const optionsData = [
     {header: "Main", title: "Main"},
@@ -52,8 +53,11 @@ const Menu = () => {
                     </div>
                 </div>
                 <div className="menu-body-content">
+                    {/* MAIN MENUS */}
                     <ProfileMenu/>
                     <BackgroundMenu/>
+                    {/* WIDGET MENUS */}
+                    <WeatherMenu/>
                 </div>
             </div>
         </div>

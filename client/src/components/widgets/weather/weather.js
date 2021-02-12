@@ -7,119 +7,101 @@ import WeatherIcon from './weather-icon';
 
 
 const Weather = () => {
-    const {weatherToggled, setLocationDisabled} = useGlobalAuth();
+    const {weatherToggled, setLocationDenied} = useGlobalAuth();
     const [weatherData, setWeatherData] = useState(null);
 
 
     useEffect(() => { 
-        const getWeather = async() => {
-            const location = await fetchLocation()
-            //if location services are blocked
-            if(location.denied) {
-                return;
-            }
-            //fetch weather api with city
-            const data = await weatherService.fetchWeather(location.city);
-            formatData(data)
+        weatherToggled && getWeather()
+    }, [weatherToggled])
+
+    const getWeather = async() => {
+        const location = await fetchLocation()
+        //if location services are blocked
+        if(location.denied) {
+            return;
         }
-    
-        const fetchLocation = async () => {
-            const coords = await getCoords()
+        //fetch weather api with city
+        const data = await weatherService.fetchWeather(location);
+        formatData(data)
+    }
+
+    const fetchLocation = async () => {
+        return new Promise(async function(resolve) {
+            const data = await getCoords()
             //if user has location services blocked
-            if(coords.denied) {
-                return coords;
+            if(data.denied) {
+                updateLocalStorage("denied", true)
+                setLocationDenied(true);
+                return data;
             }
             // set cords in local storage
-            const localWeatherData = JSON.parse(localStorage.getItem("weather"));
-            const updatedWeatherData = {
-                ...localWeatherData,
-                coords: coords
-            }
-            localStorage.setItem("weather", JSON.stringify(updatedWeatherData));
-            //fetch city with coords
-            return await getCity(coords);
-        }
+            updateLocalStorage("coords", data);
+            resolve(data)
+        })
+    }
     
-        
-        const getCoords = async() => {
-            return new Promise(function(resolve) {
+    const getCoords = async() => {
+        return new Promise(function(resolve) {
+            if(navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function(position) {
-                    if(position) {
-                        //set coords in local storage
-                        const localWeatherData = JSON.parse(localStorage.getItem("weather"));
-                        const updatedWeatherData = {
-                            ...localWeatherData,
-                            locationServices: true
-                        }
-                        localStorage.setItem("weather", JSON.stringify(updatedWeatherData))
-                        setLocationDisabled(false);
-                        //resolve promise w/ coords
-                        resolve({longitude: position.coords.longitude, latitude: position.coords.latitude})
-                    }
-                // if user denied geolocation services
+                    //set location enabled in LS
+                    updateLocalStorage("denied", false)
+                    setLocationDenied(false);
+                    //resolve promise w/ coords
+                    resolve({longitude: position.coords.longitude, latitude: position.coords.latitude});
+                // ERROR HANDLING
                 }, function(error) {
-                    if(error.code === error.PERMISSION_DENIED) {
-                        // set location disabled in local storage
-                        const localWeatherData = JSON.parse(localStorage.getItem("weather"));
-                        const updatedWeatherData = {
-                            ...localWeatherData,
-                            locationServices: false
-                        }
-                        localStorage.setItem("weather", JSON.stringify(updatedWeatherData))
-                        setLocationDisabled(true);
-                        //resolve promise w/ error
-                        resolve({denied: true, error: error});
-                    }
+                    const data = handleGeolocationError(error);
+                    resolve(data);
                 })
-            })
-        }
-        
-        const getCity = async({longitude, latitude}) => {
-            return new Promise(function (resolve) {
-                // check local storage for stored city
-                const localWeatherData = JSON.parse(localStorage.getItem("weather"));
-                if(localWeatherData.coords && localWeatherData.city) {
-                    //if user hasn't changed their location
-                    if(localWeatherData.coords.longitude === longitude && localWeatherData.coords.latitude === latitude) {
-                        resolve({city: localWeatherData.city});
-                        return;
-                    }
-                }
-                // if no local storage data, fetch city from api
-                weatherService.fetchCity(latitude, longitude)
-                .then(data => {
-                    const city = data.address.city;
-                    // set city in local storage
-                    const localWeatherData = JSON.parse(localStorage.getItem("weather"));
-                    const updatedWeather = {
-                        ...localWeatherData,
-                        city: city
-                    }
-                    localStorage.setItem("weather", JSON.stringify(updatedWeather));
-                    //resolve promise with city
-                    resolve({city: city})
-                })
-            })
-        }
-    
-        const formatData = (data) => {
-            const desc = capitalizeFirstLetter(data.weather[0].description);
-            const temp = Math.trunc(data.main.temp);
-            const city = data.name;
-            let icon = data.weather[0].icon;
-            if(icon.includes("n")) {
-                icon = setCharAt(icon, 2, 'd')
+            } else {
+                console.log("Your browser does not support geolocation services.")
             }
-            const formattedData = {
-                description: desc,
-                temperature: temp,
-                city: city,
-                icon: icon
-            }
-            setWeatherData(formattedData)
+
+        })
+    }
+
+    const handleGeolocationError = (err) => {
+        switch(err.code) {
+            case err.PERMISSION_DENIED:
+                return {denied: true, error: err}
+            case err.POSITION_UNAVAILABLE:
+                return {unavailable: true, error: err}
+            case err.TIMEOUT:
+                return {timeout: true, error: err}
+            case err.UNKNOWN_ERROR:
+                return {unknown: true, error: err}
+            default:
+                return err;
+          }
+    }
+
+    const formatData = (data) => {
+        const desc = capitalizeFirstLetter(data.weather[0].description);
+        const temp = Math.trunc(data.main.temp);
+        const city = data.name;
+        let icon = data.weather[0].icon;
+        if(icon.includes("n")) {
+            icon = setCharAt(icon, 2, 'd')
         }
-        weatherToggled && getWeather()
-    }, [weatherToggled, setLocationDisabled])
+        const formattedData = {
+            description: desc,
+            temperature: temp,
+            city: city,
+            icon: icon
+        }
+        setWeatherData(formattedData)
+    }
+
+    const updateLocalStorage = (item, data) => {
+        const localWeatherData = JSON.parse(localStorage.getItem("weather"));
+        const updatedWeatherData = {
+            ...localWeatherData,
+            [item]: data
+        }
+        localStorage.setItem("weather", JSON.stringify(updatedWeatherData));
+    }
 
     //QOL FUNCTIONS
     function capitalizeFirstLetter(string) {
@@ -138,15 +120,6 @@ const Weather = () => {
                 <h1>{weatherData.temperature}°</h1>
             </span>
             <p>{weatherData.description}</p>
-            {/* <span className="content-weather-description">
-                <SunnyIcon/>
-                <p>{weatherData.description}</p>
-            </span>
-            <span className="content-weather-body">
-                <h1>{weatherData.temperature}°</h1>
-                <p>{weatherData.city}</p>
-            </span>
-            <Moment className="content-weather-date" format="ddd" date={date}/> */}
         </div>
      );
 }

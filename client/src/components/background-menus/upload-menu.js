@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import {useDropzone} from "react-dropzone";
 
 import {ReactComponent as ImageIcon} from "../../icons/settings/image-black-48dp.svg"
+import {ReactComponent as UploadIcon} from "../../icons/file_upload-black-48dp.svg";
 
 const UploadMenu = () => {
   return ( 
     <div className="m-upload-wrapper">
       <ImageInput/>
-      <button>Upload Background</button>
+      <button><UploadIcon/>Upload Background</button>
     </div>
    );
 }

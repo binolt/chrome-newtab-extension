@@ -4,6 +4,8 @@ import Weather from './widgets/weather/weather';
 import Moment from "react-moment"
 import {useGlobalAuth} from "../context/global-context";
 import Modal from './modal';
+import { css } from "@emotion/core";
+import BeatLoader from "react-spinners/BeatLoader";
 
 //ICONS
 import {ReactComponent as MenuIcon} from "../icons/menu-black-24dp.svg"; 
@@ -40,8 +42,18 @@ const Landing = () => {
     const openModal = () => {
       setModalIsOpen(true)
     }
+
+    const override = css`
+      display: block;
+      margin: 0 auto;
+      border-color: red;
+    `;
   
-    return ( 
+    return (
+      <div>
+        {!loaded && ( 
+          <BeatLoader color="#fff" size={15} css={override}/>
+        )}
         <div className="app" style={{backgroundImage: `url(${backgroundImage})`, opacity: loaded ? 1 : 0}}>
         {/* <div className="app-container">
 
@@ -84,6 +96,7 @@ const Landing = () => {
               <stop offset="100%" stopColor="#00ffa2" />
           </linearGradient>
         </svg>
+      </div>
       </div>
      );
 }

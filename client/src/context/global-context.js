@@ -11,7 +11,7 @@ export function useGlobalAuth() {
 
 export function AuthProvider({children}) {
     const [weatherToggled, setWeatherToggled] = useState(false);
-    const [locationDisabled, setLocationDisabled] = useState(false);
+    const [locationDenied, setLocationDenied] = useState(false);
     const [loaded, setLoaded] = useState(false)
     const [backgroundImage, setBackgroundImage] = useState("")
 
@@ -32,10 +32,8 @@ export function AuthProvider({children}) {
             const localWeatherData = JSON.parse(localStorage.getItem("weather"))
             //if weather data exists in local storage
             if(localWeatherData) {
-                localWeatherData.weatherServices && setWeatherToggled(true);
-                if(!localWeatherData.locationServices) {
-                    setLocationDisabled(true)
-                }
+                localWeatherData.enabled && setWeatherToggled(true);
+                localWeatherData.denied && setLocationDenied(true)
             }
             resolve();
         })
@@ -55,8 +53,8 @@ export function AuthProvider({children}) {
     const value = {
         weatherToggled,
         setWeatherToggled,
-        locationDisabled, 
-        setLocationDisabled,
+        locationDenied, 
+        setLocationDenied,
         backgroundImage,
         setBackgroundImage,
         loaded

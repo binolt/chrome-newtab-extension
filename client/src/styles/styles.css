@@ -1112,6 +1112,23 @@
   cursor: pointer;
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-weight: 500;
+}
+
+.m-upload-wrapper button svg {
+  fill: #fff;
+  width: 22px;
+  height: 22px;
+  margin-right: 0.25rem;
 }
 
 .m-upload-wrapper button:hover {

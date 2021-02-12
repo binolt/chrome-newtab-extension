@@ -4,8 +4,8 @@ const WeatherService = {
           .then((res) => res.json())
           .then((data) => data);
       },
-      fetchWeather: (city) => {
-        return fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.REACT_APP_OPEN_WEATHER_API_KEY}&units=imperial`)
+      fetchWeather: (location) => {
+        return fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${process.env.REACT_APP_OPEN_WEATHER_API_KEY}&units=imperial`)
           .then((res) => res.json())
           .then((data) => data);
       },
