@@ -51,9 +51,7 @@ const Landing = () => {
   
     return (
       <div>
-        {!loaded && ( 
-          <BeatLoader color="#fff" size={15} css={override}/>
-        )}
+        <BeatLoader color="#fff" size={15} css={override} loading={!loaded}/>
         <div className="app" style={{backgroundImage: `url(${backgroundImage})`, opacity: loaded ? 1 : 0}}>
         {/* <div className="app-container">
 

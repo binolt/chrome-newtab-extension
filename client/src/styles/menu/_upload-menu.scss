@@ -1,33 +1,7 @@
 @import "../colors";
 
-.m-upload-wrapper {
-  button {
-    margin: 0;
-    margin-top: 1rem;
-    width: 80%;
-    padding: 0.75rem;
-    background: $primaryGradient;
-    border: none;
-    outline: none;
-    color: $primaryText;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.5s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 500;
-    svg {
-      fill: #fff;
-      width: 22px;
-      height: 22px;
-      margin-right: 0.25rem;
-    }
-    &:hover {
-      background: $primaryGradientHover;
-    }
-  }
-}
+// .m-upload-wrapper {
+// }
 
 .m-upload-body {
   cursor: pointer;
@@ -38,8 +12,8 @@
   align-items: center;
   flex-direction: column;
   box-sizing: border-box;
-  padding: 1.75rem 1rem;
-  width: 80%;
+  padding: 2.5rem 1rem;
+  width: 100%;
   background-size: cover;
   background-position: center;
   position: relative;
@@ -85,4 +59,72 @@
   position: absolute;
   top: 0.5rem;
   right: 1rem;
+}
+
+.m-upload-data {
+  align-items: center;
+  margin-top: 1rem;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  div {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.m-upload-data-left {
+  width: 60%;
+  position: relative;
+  .m-upload-data-img {
+    background-size: cover;
+    background-position: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    margin-right: 0.5rem;
+  }
+  span {
+    width: calc(100% - 40px - 0.5rem);
+  }
+  h6 {
+    font-size: 0.76em;
+    font-weight: 400;
+    width: 100%;
+    overflow: hidden;
+    overflow-x: scroll;
+    margin-bottom: 0.1rem;
+  }
+  p {
+    font-size: 0.6em;
+    color: grey;
+  }
+}
+
+.m-upload-data-right {
+  display: flex;
+  justify-content: space-between;
+  width: 34%;
+  button {
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+  }
+  :nth-child(1) {
+    background: $primaryGradient;
+    color: $primaryText;
+    transition: all 0.5s ease;
+    font-weight: 500;
+    svg {
+      fill: #fff;
+      width: 22px;
+      height: 22px;
+      margin-right: 0.25rem;
+    }
+    &:hover {
+      background: $primaryGradientHover;
+    }
+  }
 }

@@ -94,12 +94,45 @@
   background-size: cover;
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   grid-gap: 15px 0px;
-  grid-auto-rows: 50px;
+  grid-auto-rows: 70px;
+  div {
+    width: 115px;
+    height: 75px;
+    position: relative;
+  }
+  span {
+    width: 115px;
+    height: 75px;
+    cursor: pointer;
+    &::after {
+      content: "";
+      width: 115px;
+      height: 75px;
+      position: absolute;
+      left: 0;
+    }
+    &:hover {
+      &::after {
+        background: rgba(0, 0, 0, 0.377);
+      }
+    }
+  }
+  svg {
+    position: absolute;
+    fill: #fff;
+    bottom: 0;
+    width: 20px;
+    height: 20px;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    z-index: 2;
+  }
   img {
     border-radius: 5px;
-    width: 80px;
-    cursor: pointer;
+    width: 115px;
+    height: 75px;
+    position: relative;
   }
 }
