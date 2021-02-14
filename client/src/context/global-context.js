@@ -14,6 +14,7 @@ export function AuthProvider({children}) {
     const [locationDenied, setLocationDenied] = useState(false);
     const [loaded, setLoaded] = useState(false)
     const [backgroundImage, setBackgroundImage] = useState("")
+    const [favorited, setFavorited] = useState([]);
 
     const preloadBackground = () => {
         return new Promise(function(resolve) {
@@ -39,10 +40,19 @@ export function AuthProvider({children}) {
         })
     }
 
+    const loadFavorites = () => {
+        return new Promise(function(resolve) {
+            const favList = JSON.parse(localStorage.getItem("favorited"))
+            setFavorited(favList);
+            resolve()
+        })
+    }
+
     useEffect(() => {
         const loadApp = async () => {
             await preloadBackground();
             await fetchWeatherInfo();
+            await loadFavorites();
             setLoaded(true);
         }
         loadApp();
@@ -57,7 +67,9 @@ export function AuthProvider({children}) {
         setLocationDenied,
         backgroundImage,
         setBackgroundImage,
-        loaded
+        loaded,
+        favorited,
+        setFavorited
     }
     return (
         <AuthContext.Provider value={value}>

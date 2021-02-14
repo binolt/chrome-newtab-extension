@@ -13,6 +13,7 @@ const unsplash = createApi({
 
 
 const FeaturedBackgrounds = () => {
+    const {favorited} = useGlobalAuth();
     const {backgroundMenu} = useAuth()
     const [images, setImages] = useState([])
     const [loaded, setLoaded] = useState(false)
@@ -23,7 +24,6 @@ const FeaturedBackgrounds = () => {
             perPage: 20
           })
           setImages(data.response.results);
-          console.log(data)
         }
         test()
         setLoaded(true)
@@ -41,11 +41,12 @@ const FeaturedBackgrounds = () => {
 }
 
 const ImageItem = (img) => {
-  const {setBackgroundImage} = useGlobalAuth()
+  const {setBackgroundImage, favorited, setFavorited} = useGlobalAuth()
   const [spans, setSpans] = useState(0)
   const imageRef = useRef(null);
   const svgRef = useRef(null);
   const [isHovering, setIsHovering] = useState(false)
+  const [image, setImage] = useState(img);
   
   useEffect(() => {
     const updateSpans = () => {
@@ -55,62 +56,86 @@ const ImageItem = (img) => {
       imageRef.current.removeEventListener("load", updateSpans)
     }
     imageRef.current.addEventListener("load", updateSpans);
+    const checkFavorites = () => {
+      if(favorited) {
+        favorited.forEach((item) => {
+          if(item.id === image.id) {
+            setImage({
+              ...image,
+              isFavorite: true
+            })
+          } 
+        })
+      }
+    }
+    checkFavorites();
   }, [])
 
   const updateImage = (e) => {
     if(e.target === svgRef.current) {
       return;
     }
-    localStorage.setItem("backgroundImg", img.urls.full)
-    setBackgroundImage(img.urls.full)
+    localStorage.setItem("backgroundImg", image.urls.full)
+    setBackgroundImage(image.urls.full)
   }
 
   const handleFavorite = () => {
     let updatedList = []
     let favoritedList = JSON.parse(localStorage.getItem("favorited"));
+
     if(!favoritedList) {
       updatedList = [
-        {image: img}
+        image
       ]
     }
+
+
     if(favoritedList) {
+      let newList = [];
+      let duplicateItem = undefined;
+
       favoritedList.forEach(item => {
         //if img already favorite | remove it
-        if(item.image.id === img.id) {
-          favoritedList.filter(removeImage);
-          console.log(favoritedList);
+        if(item.id === image.id) {
+          duplicateItem = item;
+          return;
         }
-
-
+        newList.push(item);
       })
-
-      console.log("SECOND", favoritedList)
-
+      
       //update list w/ new image
-      updatedList = [
-        ...favoritedList,
-        {image: img}
-      ]
+      if(duplicateItem) {
+        updatedList = newList;
+        setImage({
+          ...image,
+          isFavorite: false
+        })
+      } else {
+        setImage({
+          ...image,
+          isFavorite: true
+        })
+        updatedList = [
+          ...newList,
+          image
+        ]
+      }
     }
 
+    setFavorited(updatedList);
+    
     localStorage.setItem("favorited", JSON.stringify(updatedList));
   }
 
-  const removeImage = (item) => {
-    if(item.image.id !== img.id) {
-      return;
-    }
-    
-  }
 
   return (
     <div style={{gridRowEnd: `span ${spans}`}} onMouseOver={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
       <span onClick={updateImage}>
-      {isHovering && <Heart ref={svgRef} onClick={handleFavorite}/>}
+      {isHovering && <Heart style={{background: image.isFavorite && "red"}} ref={svgRef} onClick={handleFavorite}/>}
       <img
         ref={imageRef}
-        src={img.urls.small}
-        alt={img.description}
+        src={image.urls.small}
+        alt={image.description}
         />
         </span>
     </div>
