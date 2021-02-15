@@ -13,9 +13,10 @@ import {ReactComponent as SettingsIcon} from "../../icons/settings/settings-blac
 import {ReactComponent as ChevronLeft} from "../../icons/chevron_left-black-48dp.svg";
 
 import bg from "../../images/VYOsxOY.jpg";
-import FeaturedBackgrounds from '../background-menus/featured-backgrounds';
+import FeaturedBackgrounds from '../background-menus/featured-menu';
 import UploadMenu from '../background-menus/upload-menu';
 import WeatherMenu from '../widgets/weather/weather-menu';
+import FavoritedMenu from '../background-menus/favorited-menu';
 
 const optionsData = [
     {header: "Main", title: "Main"},
@@ -138,6 +139,7 @@ const BackgroundMenu = () => {
                 <UploadMenu/>
             </SideBackgroundMenu>
             <SideBackgroundMenu title="Favorited">
+                <FavoritedMenu/>
             </SideBackgroundMenu>
             <SideBackgroundMenu title="Unsplash">
             </SideBackgroundMenu>
