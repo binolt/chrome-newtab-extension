@@ -1,13 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import { useAuth } from '../../context/menu-context';
-import { createApi } from 'unsplash-js';
+import {unsplash} from "../../unsplash-config";
 import ImageItem from "../image-item";
 
 
-const unsplash = createApi({
-    accessKey: process.env.REACT_APP_UNSPLASH_API_KEY,
-    headers: { 'X-Custom-Header': 'foo' },
-});
 
 
 

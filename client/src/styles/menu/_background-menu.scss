@@ -153,3 +153,19 @@
     z-index: 3;
   }
 }
+
+
+.menu-image-item-primary-enter {
+  opacity: 0;
+}
+.menu-image-item-primary-enter-active {
+  opacity: 1;
+  transition: all 350ms ease;
+}
+.menu-image-item-primary-exit {
+  opacity: 1;
+}
+.menu-image-item-primary-exit-active {
+  opacity: 0;
+  transition: opacity 350ms;
+}

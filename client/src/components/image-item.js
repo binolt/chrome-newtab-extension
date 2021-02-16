@@ -63,9 +63,11 @@ const ImageItem = (img) => {
         favoritedList.forEach(item => {
           //if img already favorite | remove it
           if(item.id === image.id) {
+            item.isFavorite = false;
             duplicateItem = item;
             return;
           }
+          item.isFavorite = true;
           newList.push(item);
         })
         
@@ -98,7 +100,7 @@ const ImageItem = (img) => {
       <div className="menu-image-item" style={{gridRowEnd: `span ${spans}`}} onMouseOver={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
         <span onClick={updateImage}>
         {isHovering && (
-        <div className="menu-image-item-favorite">
+          <div className="menu-image-item-favorite">
           <HeartFilled style={{opacity: image.isFavorite ? 1 : 0}} />
           <HeartOutline style={{opacity: image.isFavorite ? 0 : 1}}/>
           <div ref={heartRef} onClick={handleFavorite}/>

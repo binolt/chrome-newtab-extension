@@ -4,6 +4,7 @@ import ImageItem from "../image-item";
 
 
 
+
 const FavoritedMenu = () => {
     const {favorited} = useGlobalAuth();
     return ( 
@@ -16,7 +17,6 @@ const FavoritedMenu = () => {
         </div>
      );
 }
-
 
  
 export default FavoritedMenu;

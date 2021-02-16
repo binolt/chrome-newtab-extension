@@ -17,6 +17,7 @@ import FeaturedBackgrounds from '../background-menus/featured-menu';
 import UploadMenu from '../background-menus/upload-menu';
 import WeatherMenu from '../widgets/weather/weather-menu';
 import FavoritedMenu from '../background-menus/favorited-menu';
+import UnsplashMenu from '../background-menus/unplash-menu';
 
 const optionsData = [
     {header: "Main", title: "Main"},
@@ -142,6 +143,7 @@ const BackgroundMenu = () => {
                 <FavoritedMenu/>
             </SideBackgroundMenu>
             <SideBackgroundMenu title="Unsplash">
+                <UnsplashMenu/>
             </SideBackgroundMenu>
         </div>
     )
