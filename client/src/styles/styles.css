@@ -1120,6 +1120,8 @@
   width: 115px;
   height: 75px;
   position: relative;
+  -webkit-transition: opacity 0.5s ease;
+  transition: opacity 0.5s ease;
 }
 
 .menu-image-item-favorite {

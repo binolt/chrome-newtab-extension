@@ -13,7 +13,8 @@ const ImageItem = (img) => {
     const imageRef = useRef(null);
     const [isHovering, setIsHovering] = useState(false)
     const [image, setImage] = useState(img);
-    
+    const [loaded, setLoaded] = useState(false);
+
     useEffect(() => {
       const updateSpans = () => {
         const height = imageRef.current.clientHeight;
@@ -35,6 +36,16 @@ const ImageItem = (img) => {
         }
       }
       checkFavorites();
+
+
+      const preload = () => {
+        let tempImage = new Image();
+        tempImage.src = img.urls.small;
+        tempImage.onload = function () {
+            setLoaded(true)
+        }
+      }
+      preload()
     }, [])
   
     const updateImage = (e) => {
@@ -97,7 +108,7 @@ const ImageItem = (img) => {
   
   
     return (
-      <div className="menu-image-item" style={{gridRowEnd: `span ${spans}`}} onMouseOver={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
+      <div className="menu-image-item" style={{gridRowEnd: `span ${spans}`, opacity: loaded ? 1 : 0}} onMouseOver={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
         <span onClick={updateImage}>
         {isHovering && (
           <div className="menu-image-item-favorite">
