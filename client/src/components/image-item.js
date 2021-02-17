@@ -7,7 +7,7 @@ import {ReactComponent as HeartFilled} from "../icons/favorite-black-48dp.svg";
 
 
 const ImageItem = (img) => {
-    const {setBackgroundImage, favorited, setFavorited} = useGlobalAuth()
+    const {setCurrentImage, favorited, setFavorited} = useGlobalAuth()
     const [spans, setSpans] = useState(0)
     const heartRef = useRef(null);
     const imageRef = useRef(null);
@@ -57,8 +57,8 @@ const ImageItem = (img) => {
       if(e.target === heartRef.current) {
         return;
       }
-      localStorage.setItem("backgroundImg", image.urls.raw + "&w=1500&dpr=2")
-      setBackgroundImage(image.urls.raw + "&w=1500&dpr=2")
+      localStorage.setItem("currentImage", JSON.stringify(image));
+      setCurrentImage(image);
     }
   
     const handleFavorite = () => {

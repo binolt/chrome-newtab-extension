@@ -166,6 +166,20 @@
     }
 }
 
+
+.content-credit {
+    position: absolute;
+    right: 2rem;
+    bottom: 1rem;
+    p {
+        color: rgb(167, 167, 167);
+        font-size: .76em;
+    }
+    a {
+        color: grey;
+    }
+}
+
 // REACT MODAL CLASSES
 .ReactModal__Overlay {
     transform: translateY(10px);

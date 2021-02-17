@@ -292,6 +292,21 @@
   fill: #fff;
 }
 
+.content-credit {
+  position: absolute;
+  right: 2rem;
+  bottom: 1rem;
+}
+
+.content-credit p {
+  color: #a7a7a7;
+  font-size: .76em;
+}
+
+.content-credit a {
+  color: grey;
+}
+
 .ReactModal__Overlay {
   -webkit-transform: translateY(10px);
           transform: translateY(10px);

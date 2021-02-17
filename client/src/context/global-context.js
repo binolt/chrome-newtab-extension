@@ -13,16 +13,17 @@ export function AuthProvider({children}) {
     const [weatherToggled, setWeatherToggled] = useState(false);
     const [locationDenied, setLocationDenied] = useState(false);
     const [loaded, setLoaded] = useState(false)
-    const [backgroundImage, setBackgroundImage] = useState("")
+    const [currentImage, setCurrentImage] = useState(null);
     const [favorited, setFavorited] = useState([]);
 
     const preloadBackground = () => {
         return new Promise(function(resolve) {
-            const background = localStorage.getItem("backgroundImg")
+            const localData = JSON.parse(localStorage.getItem("currentImage"));
+            console.log(localData)
             const img = new Image()
-            img.src = background ? background : DEFAULT_BACKGROUND;
+            img.src = localData ? localData.urls.raw + "&w=1500&dpr=2" : DEFAULT_BACKGROUND;
             img.onload = () => {
-                setBackgroundImage(img.src);
+                setCurrentImage(localData);
                 resolve()
             }
         })
@@ -65,8 +66,8 @@ export function AuthProvider({children}) {
         setWeatherToggled,
         locationDenied, 
         setLocationDenied,
-        backgroundImage,
-        setBackgroundImage,
+        currentImage,
+        setCurrentImage,
         loaded,
         favorited,
         setFavorited

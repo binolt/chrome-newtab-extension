@@ -12,28 +12,21 @@ import {ReactComponent as MenuIcon} from "../icons/menu-black-24dp.svg";
 import {ReactComponent as Search} from "../icons/search-black-24dp.svg" 
 import {ReactComponent as Google} from "../icons/google-icon.svg" 
 import { MenuProvider } from '../context/menu-context';
-// import {ReactComponent as CloseIcon} from "../icons/settings/close-black-48dp.svg"
 
 const Landing = () => {
     //global state
-    const {loaded, backgroundImage} = useGlobalAuth()
+    const {loaded, currentImage} = useGlobalAuth()
     //local state
     const [date, setDate] = useState(new Date());
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
-    
     useEffect(() => {
-        setInterval(() => {
-            setDate(new Date())
-        }, 1000);
+      loaded && console.log(currentImage)
+      setInterval(() => {
+          setDate(new Date())
+      }, 1000);
     }, [])
-  
-  
-  
-    // const changeImage = (img) => {
-    //     localStorage.setItem("backgroundImg", img.urls.full);
-    //     setBackgroundImage(img.urls.full)
-    // }
+
 
     const closeModal = () => {
       setModalIsOpen(false);
@@ -52,7 +45,7 @@ const Landing = () => {
     return (
       <div>
         <BeatLoader color="#fff" size={15} css={override} loading={!loaded}/>
-        <div className="app" style={{backgroundImage: `url(${backgroundImage})`, opacity: loaded ? 1 : 0}}>
+        <div className="app" style={{backgroundImage: loaded && `url(${currentImage.urls.raw + "&w=1500&dpr=2"})`, opacity: loaded ? 1 : 0}}>
         {/* <div className="app-container">
 
         </div> */}
@@ -71,10 +64,6 @@ const Landing = () => {
         <div className="content-menu-placeholder" onClick={openModal}>
           <MenuIcon/>
         </div>
-        {/* <Modal closeTimeoutMS={250} className="menu-modal" overlayClassName="menu-overlay" onRequestClose={() => setModalIsOpen(false)} isOpen={modalIsOpen} contentLabel="modal">
-            <Menu changeImage={changeImage}/>
-            <CloseIcon className="menu-close" onClick={() => setModalIsOpen(false)}/>
-        </Modal> */}
         <Modal className="menu-modal" overlayClassname="menu-modal-overlay" isOpen={modalIsOpen} onRequestClose={closeModal}>
           <MenuProvider>
           <Menu/>
@@ -87,6 +76,9 @@ const Landing = () => {
           <Moment format="dddd, MMMM DD" className="content-time-date">
             {date}
           </Moment>
+        </div>
+        <div className="content-credit">
+          {loaded && <p>Photo by <a href={currentImage.user.links.html} target="_blank">{currentImage.user.name}</a> on <a href="https://unsplash.com/">Unsplash</a></p>}
         </div>
         <svg style={{width: 0, height: 0, position: "absolute"}} aria-hidden="true" focusable="false">
           <linearGradient id="my-cool-gradient" x2="1" y2="1">
