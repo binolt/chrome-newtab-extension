@@ -15,15 +15,25 @@ const ImageItem = (img) => {
     const [image, setImage] = useState(img);
     const [loaded, setLoaded] = useState(false);
 
+
     useEffect(() => {
       const updateSpans = () => {
         const height = imageRef.current.clientHeight;
         const spans = Math.ceil(height / 80);
         setSpans(spans);
+        //cleanup event listener
         imageRef.current.removeEventListener("load", updateSpans)
       }
-      imageRef.current.addEventListener("load", updateSpans);
-      const checkFavorites = () => {
+  
+      const preload = () => {
+        let tempImage = new Image();
+        tempImage.src = img.urls.small;
+        tempImage.onload = function () {
+            setLoaded(true)
+        }
+      }
+  
+      const fetchFavorites = () => {
         if(favorited) {
           favorited.forEach((item) => {
             if(item.id === image.id) {
@@ -35,25 +45,20 @@ const ImageItem = (img) => {
           })
         }
       }
-      checkFavorites();
 
 
-      const preload = () => {
-        let tempImage = new Image();
-        tempImage.src = img.urls.small;
-        tempImage.onload = function () {
-            setLoaded(true)
-        }
-      }
+      imageRef.current.addEventListener("load", updateSpans);
+      fetchFavorites();
       preload()
     }, [])
+
   
     const updateImage = (e) => {
       if(e.target === heartRef.current) {
         return;
       }
-      localStorage.setItem("backgroundImg", image.urls.full)
-      setBackgroundImage(image.urls.full)
+      localStorage.setItem("backgroundImg", image.urls.raw + "&w=1500&dpr=2")
+      setBackgroundImage(image.urls.raw + "&w=1500&dpr=2")
     }
   
     const handleFavorite = () => {

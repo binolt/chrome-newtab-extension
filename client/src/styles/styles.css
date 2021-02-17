@@ -1384,7 +1384,9 @@
   left: 0;
 }
 
-.m-unsplash-search div {
+.m-unsplash-search button {
+  border: none;
+  outline: none;
   position: absolute;
   right: 0;
   top: 0;
@@ -1406,7 +1408,7 @@
   background: #202020;
 }
 
-.m-unsplash-search div:hover {
+.m-unsplash-search button:hover {
   background: #1d1d1d;
 }
 
