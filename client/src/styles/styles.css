@@ -18,6 +18,13 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  padding: .75rem 1.25rem;
+  border-radius: 10px;
+  background: rgba(31, 33, 39, 0.01);
+  -webkit-box-shadow: 0 5px 35px 0 rgba(15, 15, 15, 0.25);
+          box-shadow: 0 5px 35px 0 rgba(15, 15, 15, 0.25);
+  -webkit-backdrop-filter: blur(20px);
+          backdrop-filter: blur(20px);
 }
 
 .content-weather span {
@@ -31,14 +38,14 @@
 }
 
 .content-weather p {
-  font-size: .8em;
+  font-size: .72em;
   font-weight: 300;
   margin-top: -.25rem;
   text-shadow: 1px 2px 3px #00000044;
 }
 
 .content-weather svg {
-  width: 60px;
+  width: 40px;
   -webkit-filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.1));
           filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.1));
   margin-right: .5rem;
@@ -48,7 +55,7 @@
   text-shadow: 1px 2px 5px #00000042;
   font-weight: 300;
   color: #fff;
-  font-size: 1.9em;
+  font-size: 1.5em;
   margin-top: -.25rem;
 }
 
@@ -293,13 +300,13 @@
 
 .content-credit {
   position: absolute;
-  right: 2rem;
+  right: 3rem;
   bottom: 1rem;
 }
 
 .content-credit p {
   color: #a7a7a7;
-  font-size: .76em;
+  font-size: .6em;
 }
 
 .content-credit a {
@@ -308,6 +315,8 @@
 
 .content-todo {
   position: absolute;
+  bottom: 3rem;
+  right: 3rem;
 }
 
 .ReactModal__Overlay {

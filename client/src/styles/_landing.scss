@@ -169,11 +169,11 @@
 
 .content-credit {
     position: absolute;
-    right: 2rem;
+    right: 3rem;
     bottom: 1rem;
     p {
         color: rgb(167, 167, 167);
-        font-size: .76em;
+        font-size: .6em;
     }
     a {
         color: grey;
@@ -182,6 +182,8 @@
 
 .content-todo {
     position: absolute;
+    bottom: 3rem;
+    right: 3rem;
 }
 
 // REACT MODAL CLASSES

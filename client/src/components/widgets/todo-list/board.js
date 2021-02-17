@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Column from "./column";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
+import { useGlobalAuth } from "../../../context/global-context";
 
 const Container = styled.div`
   display: flex;
@@ -21,6 +22,7 @@ const defaultColumnData = {
 
 const Board = () => {
   const [columnData, setColumnData] = useState(defaultColumnData);
+  const {todoData, loaded} = useGlobalAuth();
 
   useEffect(() => {
     fetchBoard()
@@ -164,8 +166,9 @@ const Board = () => {
   };
 
   
-  return (
+  return loaded && todoData.isToggled && (
      (
+      <div className="content-todo">
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable
           droppableId="all-columns"
@@ -193,6 +196,7 @@ const Board = () => {
           )}
         </Droppable>
       </DragDropContext>
+      </div>
     )
   );
 };

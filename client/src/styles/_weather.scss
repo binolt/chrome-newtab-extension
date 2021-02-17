@@ -8,19 +8,24 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: .75rem 1.25rem;
+    border-radius: 10px;
+    background: rgba(31, 33, 39, 0.01);
+    box-shadow: 0 5px 35px 0 rgba(15, 15, 15, 0.25);
+    backdrop-filter: blur( 20px );
     span {
         display: flex;
         align-items: flex-start;
         margin-bottom: .25rem;
     }
     p  {
-        font-size: .8em;
+        font-size: .72em;
         font-weight: 300;
         margin-top: -.25rem;
         text-shadow: 1px 2px 3px #00000044;
     }
     svg {
-        width: 60px;
+        width: 40px;
         filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .1));
         margin-right: .5rem;
     }
@@ -28,7 +33,7 @@
         text-shadow: 1px 2px 5px #00000042;
         font-weight: 300;
         color: #fff;
-        font-size: 1.9em;
+        font-size: 1.5em;
         margin-top: -.25rem;
     }
 }
