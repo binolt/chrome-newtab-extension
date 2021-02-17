@@ -4,56 +4,72 @@
     display: flex;
     flex-direction: column;
     border-radius: 5%;
-    background-color: orange;
   }
   
   .column-title-wrap {
     border-radius: 5px;
-    background-color: #2a3342;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+    background: rgba(0, 0, 0, 0.675);
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur( 11.5px );
+    z-index: 2;
+    h3 {
+      font-weight: 300;
+      padding: 8px;
+      color: #fff;
+    }
   }
-  .column-title {
-    font-weight: 300;
-    padding: 8px;
-    color: #fff;
-  }
+
   
   .column-tasklist {
-    transition: background-color 0.5s ease;
     flex-grow: 1;
     min-height: 50px;
-    padding: 10px;
-    padding-bottom: 40px;
+    padding: .5rem;
     border-radius: 5px;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
-    background-color: #465874;
     position: relative;
+    &::before {
+      border-radius: 5px;
+          border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+      top: 0;
+      left: 0;
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur( 11.5px );
+    }
   }
   
   .column-tasklist-add {
+    margin-top: .5rem;
     display: flex;
     align-items: center;
-    position: absolute;
-    color: #6b7c8f;
-    bottom: 12px;
-    font-size: 0.85em;
-    width: calc(100% - 30px);
-    padding: 5px;
+    color: #fff;
+    font-size: 0.7em;
+    box-sizing: border-box;
+    width: 100%;
+    padding: .5rem;
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.35s ease;
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur( 11.5px );
     &:hover {
-      background: #272f3d;
+      background: rgba(0, 0, 0, 0.6);
+
       color: #fff;
-      svg {
-        fill: #fff;
-      }
     }
     svg {
       margin-right: 0.15rem;
-      fill: #6b7c8f;
+      fill: #fff;
+
       width: 18px;
       height: 18px;
       transition: all 0.35s ease;

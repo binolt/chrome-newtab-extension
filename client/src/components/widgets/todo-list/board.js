@@ -28,7 +28,7 @@ const Board = () => {
 
   const fetchBoard = () => {
     const localData = JSON.parse(localStorage.getItem("todo-list"));
-    localData.board && setColumnData(localData.board);
+    localData && setColumnData(localData.board);
   }
 
 
@@ -117,7 +117,7 @@ const Board = () => {
   };
 
   const onDragEnd = (result) => {
-    const { destination, source, draggableId, type } = result;
+    const { destination, source, draggableId } = result;
 
     if (!destination) {
       return;
@@ -128,21 +128,6 @@ const Board = () => {
       destination.droppableId === source.droppableId &&
       destination.index === source.index
     ) {
-      return;
-    }
-
-    if (type === "column") {
-      const newColumnOrder = Array.from(columnData.columnOrder);
-      newColumnOrder.splice(source.index, 1);
-      newColumnOrder.splice(destination.index, 0, draggableId);
-
-      const updatedBoard = {
-        ...columnData,
-        columnOrder: newColumnOrder,
-      };
-
-      syncData(updatedBoard);
-
       return;
     }
 
@@ -176,37 +161,9 @@ const Board = () => {
 
       return;
     }
-
-    //Moving from one list to another
-
-    const startTaskIds = Array.from(start.taskIds);
-    startTaskIds.splice(source.index, 1);
-    const newStart = {
-      ...start,
-      taskIds: startTaskIds,
-    };
-
-    const finishTaskIds = Array.from(finish.taskIds);
-    finishTaskIds.splice(destination.index, 0, draggableId);
-
-    const newFinish = {
-      ...finish,
-      taskIds: finishTaskIds,
-    };
-
-    const updatedColumns = {
-      ...columnData.columns,
-      [newStart.id]: newStart,
-      [newFinish.id]: newFinish,
-    };
-
-    const updatedBoard = {
-      ...columnData,
-      columns: updatedColumns,
-    };
-
-    syncData(updatedBoard);
   };
+
+  
   return (
      (
       <DragDropContext onDragEnd={onDragEnd}>

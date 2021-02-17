@@ -1,15 +1,15 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap");
 
 .task-container {
   position: relative;
   outline: none;
   user-select: none;
-  border: 1px solid #2d3947;
   padding: 8px;
   color: #fff;
-  margin-bottom: 10px;
+  margin-bottom: .5rem;
   border-radius: 5px;
-  background-color: #2a3342;
+  border: 1px solid rgba(43, 43, 43, 0.233);
+  background: rgba(0, 0, 0, 0.45);
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.25);
   display: flex;
   position: relative;
   align-items: center;
@@ -21,7 +21,7 @@
   }
   p {
     width: 90%;
-    font-size: 0.95em;
+    font-size: 0.7em;
     overflow-wrap: break-word;
   }
   .task-menu-icon {
@@ -43,10 +43,11 @@
   position: absolute;
   top: 5px;
   right: 5px;
-  padding-bottom: 7px;
+  padding-bottom: .5rem;
   height: 69px;
   overflow: hidden;
   box-shadow: 0px 3px 5px 2px rgba(0, 0, 0, 0.15);
+  
   span {
     padding: 4px 5px;
     width: 100%;
@@ -77,13 +78,12 @@
 }
 
 .task-input {
-  background: #2a3342;
   width: 80%;
+  background: transparent;
   color: #fff;
   outline: none;
   border: none;
-  font-family: "Roboto";
-  font-size: 15.2px;
+  font-size: 0.7em;
   overflow: auto;
   resize: none;
   width: 164px;

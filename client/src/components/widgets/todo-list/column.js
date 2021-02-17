@@ -56,39 +56,39 @@ const Column = (props) => {
           ref={provided.innerRef}
         >
           <div className="column-title-wrap">
-            <h3 className="column-title" {...provided.dragHandleProps}>
+            <h3 {...provided.dragHandleProps}>
               {props.column.title}
             </h3>
           </div>
           <Droppable droppableId={props.column.id} type="task">
             {(provided, snapshot) => (
               <div
-                className="column-tasklist"
-                ref={provided.innerRef}
-                style={{
-                  backgroundColor: snapshot.isDraggingOver
-                    ? "#465874"
-                    : "#1a202a",
-                }}
+              className="column-tasklist"
+              ref={provided.innerRef}
+              // style={{
+                //   backgroundColor: snapshot.isDraggingOver
+                //     ? "#465874"
+                //     : "#1a202a",
+                // }}
                 {...provided.droppableProps}
-              >
+                >
                 <InnerList
                   tasks={props.tasks}
                   column={props.column}
                   deleteTask={props.deleteTask}
                   updateTask={props.updateTask}
-                />
+                  />
                 {provided.placeholder}
-                <div
-                  className="column-tasklist-add"
-                  onClick={() => handleNewTask(props)}
-                >
-                  <PlusIcon />
-                  New
-                </div>
               </div>
             )}
           </Droppable>
+          <div
+          className="column-tasklist-add"
+          onClick={() => handleNewTask(props)}
+          >
+          <PlusIcon />
+          <p>New</p>
+          </div>
         </div>
       )}
     </Draggable>

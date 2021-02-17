@@ -10,8 +10,8 @@ import Board from "./widgets/todo-list/board"
 
 //ICONS
 import {ReactComponent as MenuIcon} from "../icons/menu-black-24dp.svg"; 
-import {ReactComponent as Search} from "../icons/search-black-24dp.svg" 
-import {ReactComponent as Google} from "../icons/google-icon.svg" 
+// import {ReactComponent as Search} from "../icons/search-black-24dp.svg" 
+// import {ReactComponent as Google} from "../icons/google-icon.svg" 
 import { MenuProvider } from '../context/menu-context';
 
 const Landing = () => {

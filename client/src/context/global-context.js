@@ -20,7 +20,6 @@ export function AuthProvider({children}) {
     const preloadBackground = () => {
         return new Promise(function(resolve) {
             const localData = JSON.parse(localStorage.getItem("currentImage"));
-            console.log(localData)
             const img = new Image()
             img.src = localData ? localData.urls.raw + "&w=1500&dpr=2" : DEFAULT_BACKGROUND;
             img.onload = () => {
