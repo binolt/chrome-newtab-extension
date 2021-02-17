@@ -16,6 +16,7 @@ export function AuthProvider({children}) {
     const [currentImage, setCurrentImage] = useState(null);
     const [favorited, setFavorited] = useState([]);
     const [todoData, setTodoData] = useState({isToggled: false});
+    const [quoteData, setQuoteData] = useState({isToggled: false});
 
     const preloadBackground = () => {
         return new Promise(function(resolve) {
@@ -59,12 +60,23 @@ export function AuthProvider({children}) {
         })
     }
 
+    const fetchQuoteData = () => {
+        return new Promise(function(resolve) {
+            const localData = JSON.parse(localStorage.getItem("quotes"));
+            if(localData) {
+                setQuoteData(localData)
+            }
+            resolve()
+        })
+    }
+
     useEffect(() => {
         const loadApp = async () => {
             await preloadBackground();
             await fetchWeatherInfo();
             await loadFavorites();
             await fetchTodoData();
+            await fetchQuoteData();
             setLoaded(true);
         }
         loadApp();
@@ -83,7 +95,9 @@ export function AuthProvider({children}) {
         favorited,
         setFavorited,
         todoData,
-        setTodoData
+        setTodoData,
+        quoteData,
+        setQuoteData
     }
     return (
         <AuthContext.Provider value={value}>

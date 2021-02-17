@@ -141,6 +141,7 @@
     flex-direction: column;
     align-items: center;
     font-family: "Roboto";
+    width: 460px;
     .content-time-clock {
         font-size: 7em;
         font-weight: 300;
@@ -149,6 +150,14 @@
         margin-top: -.75rem;
         font-size: 1.8em;
         font-weight: 100;
+    }
+    .content-quotes {
+        margin-top: 1rem;
+        font-size: .7em;
+        width: 80%;
+        text-align: center;
+        font-style: italic;
+        color: grey;
     }
 }
 
@@ -182,9 +191,10 @@
 
 .content-todo {
     position: absolute;
-    bottom: 3rem;
-    right: 3rem;
+    top: 3rem;
+    left: 3rem;
 }
+
 
 // REACT MODAL CLASSES
 .ReactModal__Overlay {

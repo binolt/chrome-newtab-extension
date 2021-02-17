@@ -267,6 +267,7 @@
       -ms-flex-align: center;
           align-items: center;
   font-family: "Roboto";
+  width: 460px;
 }
 
 .content-time .content-time-clock {
@@ -278,6 +279,15 @@
   margin-top: -.75rem;
   font-size: 1.8em;
   font-weight: 100;
+}
+
+.content-time .content-quotes {
+  margin-top: 1rem;
+  font-size: .7em;
+  width: 80%;
+  text-align: center;
+  font-style: italic;
+  color: grey;
 }
 
 .content-menu-placeholder {
@@ -315,8 +325,8 @@
 
 .content-todo {
   position: absolute;
-  bottom: 3rem;
-  right: 3rem;
+  top: 3rem;
+  left: 3rem;
 }
 
 .ReactModal__Overlay {

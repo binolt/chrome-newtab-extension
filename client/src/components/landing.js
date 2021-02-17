@@ -13,6 +13,7 @@ import {ReactComponent as MenuIcon} from "../icons/menu-black-24dp.svg";
 // import {ReactComponent as Search} from "../icons/search-black-24dp.svg" 
 // import {ReactComponent as Google} from "../icons/google-icon.svg" 
 import { MenuProvider } from '../context/menu-context';
+import Quotes from './widgets/quotes/quotes';
 
 const Landing = () => {
     //global state
@@ -76,6 +77,7 @@ const Landing = () => {
           <Moment format="dddd, MMMM DD" className="content-time-date">
             {date}
           </Moment>
+          <Quotes/>
         </div>
         <div className="content-credit">
           {loaded && <p>Photo by <a href={currentImage.user.links.html} target="_blank">{currentImage.user.name}</a> on <a href="https://unsplash.com/">Unsplash</a></p>}
