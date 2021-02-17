@@ -307,6 +307,10 @@
   color: grey;
 }
 
+.content-todo {
+  position: absolute;
+}
+
 .ReactModal__Overlay {
   -webkit-transform: translateY(10px);
           transform: translateY(10px);

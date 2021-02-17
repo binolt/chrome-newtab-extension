@@ -6,6 +6,7 @@ import {useGlobalAuth} from "../context/global-context";
 import Modal from './modal';
 import { css } from "@emotion/core";
 import BeatLoader from "react-spinners/BeatLoader";
+import Board from "./widgets/todo-list/board"
 
 //ICONS
 import {ReactComponent as MenuIcon} from "../icons/menu-black-24dp.svg"; 
@@ -46,10 +47,7 @@ const Landing = () => {
       <div>
         <BeatLoader color="#fff" size={15} css={override} loading={!loaded}/>
         <div className="app" style={{backgroundImage: loaded && `url(${currentImage.urls.raw + "&w=1500&dpr=2"})`, opacity: loaded ? 1 : 0}}>
-        {/* <div className="app-container">
-
-        </div> */}
-        <div className="content-search">
+        {/* <div className="content-search">
           <span className="content-search-head">
           <Google className="content-icons-google"/>
           </span>
@@ -59,7 +57,7 @@ const Landing = () => {
               <Search/>
             </button>
           </form>
-        </div>
+        </div> */}
         <Weather/>
         <div className="content-menu-placeholder" onClick={openModal}>
           <MenuIcon/>
@@ -79,6 +77,9 @@ const Landing = () => {
         </div>
         <div className="content-credit">
           {loaded && <p>Photo by <a href={currentImage.user.links.html} target="_blank">{currentImage.user.name}</a> on <a href="https://unsplash.com/">Unsplash</a></p>}
+        </div>
+        <div className="content-todo">
+          <Board/>
         </div>
         <svg style={{width: 0, height: 0, position: "absolute"}} aria-hidden="true" focusable="false">
           <linearGradient id="my-cool-gradient" x2="1" y2="1">

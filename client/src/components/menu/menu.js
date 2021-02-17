@@ -18,6 +18,7 @@ import UploadMenu from '../background-menus/upload-menu';
 import WeatherMenu from '../widgets/weather/weather-menu';
 import FavoritedMenu from '../background-menus/favorited-menu';
 import UnsplashMenu from '../background-menus/unplash-menu';
+import TodoListMenu from '../widgets/todo-list/todo-list-menu';
 
 const optionsData = [
     {header: "Main", title: "Main"},
@@ -60,6 +61,7 @@ const Menu = () => {
                     <BackgroundMenu/>
                     {/* WIDGET MENUS */}
                     <WeatherMenu/>
+                    <TodoListMenu/>
                 </div>
             </div>
         </div>

@@ -8,21 +8,18 @@ const Container = styled.div`
 `;
 
 const defaultColumnData = {
-  columnOrder: ["column-1", "column-2", "column-3"],
+  columnOrder: ["column-1"],
   title: "default column",
   columns: {
     "column-1": {id: "column-1", title: "to-do", taskIds: ["task-1"]},
-    "column-2": {id: "column-2", title: "in progress", taskIds: []},
-    "column-3": {id: "column-3", title: "done", taskIds: []}
   },
   tasks: {
     "task-1": {id: "task-1", content: "Welcome to your board!", isNew: false}
   },
   createdOn: new Date (),
-  bid: 55682
 }
 
-const TodoList = (props) => {
+const Board = () => {
   const [columnData, setColumnData] = useState(defaultColumnData);
 
   useEffect(() => {
@@ -30,18 +27,22 @@ const TodoList = (props) => {
   }, [])
 
   const fetchBoard = () => {
-    const board = JSON.parse(localStorage.getItem("board/55682"));
-    board && setColumnData(board);
+    const localData = JSON.parse(localStorage.getItem("todo-list"));
+    localData.board && setColumnData(localData.board);
   }
 
 
 
   const syncData = (updatedBoard) => {
+    //update state
     setColumnData(updatedBoard);
-    localStorage.setItem(
-      `board/${updatedBoard.bid}`,
-      JSON.stringify(updatedBoard)
-    );
+    //update local storage
+    const localData = JSON.parse(localStorage.getItem("todo-list"))
+    const updatedData = {
+      ...localData,
+      board: updatedBoard
+    }
+    localStorage.setItem("todo-list", JSON.stringify(updatedData) );
   };
 
   const updateTask = (task) => {
@@ -269,4 +270,4 @@ const InnerList = React.memo((props, nextProps) => {
   }
 });
 
-export default TodoList;
+export default Board;
