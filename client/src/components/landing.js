@@ -80,7 +80,7 @@ const Landing = () => {
           <Quotes/>
         </div>
         <div className="content-credit">
-          {loaded && <p>Photo by <a href={currentImage.user.links.html} target="_blank">{currentImage.user.name}</a> on <a href="https://unsplash.com/">Unsplash</a></p>}
+          {loaded && <p>Photo by <a href={currentImage.user.links.html} target="_blank">{currentImage.user.name}</a> on <a target="_blank" href="https://unsplash.com/">Unsplash</a></p>}
         </div>
         <svg style={{width: 0, height: 0, position: "absolute"}} aria-hidden="true" focusable="false">
           <linearGradient id="my-cool-gradient" x2="1" y2="1">

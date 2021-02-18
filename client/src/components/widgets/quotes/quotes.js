@@ -8,15 +8,38 @@ const Quotes = () => {
 
     useEffect(() => {
         const fetchQuote = () => {
-            QuoteService.fetchQuote()
-            .then(res => {
-                const randomItem = Math.floor(Math.random()*res.length);
-                console.log(res[randomItem])
-                setQuote(res[randomItem])
-            })
+            const localData = JSON.parse(localStorage.getItem("quotes"));
+            if(localData) {
+                //checks local storage
+                if(localData && localData.date) {
+                    const currentDate = new Date();
+                    //only generate quote once per day
+                    if(localData.date === currentDate.getDay()) {
+                        setQuote(localData.quote);
+                        return;
+                    }
+                }
+                //fetch quote from API
+                QuoteService.fetchQuote()
+                .then(res => {
+                    const date = new Date();
+                    const randomItem = Math.floor(Math.random()*res.length);
+                    setQuote(res[randomItem])
+                    
+                    //update local storage
+                    const updatedData = {
+                        ...localData,
+                        quote: res[randomItem],
+                        date: date.getDay()
+                    }
+                    localStorage.setItem("quotes", JSON.stringify(updatedData));
+                })
+            }
         }
         fetchQuote();
-    }, [])
+    }, [quoteData])
+
+
     return loaded && quoteData.isToggled && ( 
         <div className="content-quotes">
             {quote && `"${quote.text}" - ${quote.author}`}

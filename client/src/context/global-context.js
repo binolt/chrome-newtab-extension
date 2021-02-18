@@ -1,6 +1,16 @@
 import React, { useContext, useState, useEffect } from "react";
 
-const DEFAULT_BACKGROUND = "https://res.cloudinary.com/dxqmbhsis/image/upload/v1610226492/clouds_background_pkxdke.jpg"
+const DEFAULT_BACKGROUND = {
+    urls : {
+        raw: "https://images.unsplash.com/photo-1585374591745-47614a848500?ixid=MXwxOTc0OTF8MHwxfGNvbGxlY3Rpb258MnwxMTYyNDEzNnx8fHx8Mnw&ixlib=rb-1.2.1"
+    },
+    user: {
+        name: "Cameron Venti",
+        links: {
+            html: "https://unsplash.com/@ventiviews",
+        }
+    }
+}
 
 
 const AuthContext = React.createContext();
@@ -22,9 +32,13 @@ export function AuthProvider({children}) {
         return new Promise(function(resolve) {
             const localData = JSON.parse(localStorage.getItem("currentImage"));
             const img = new Image()
-            img.src = localData ? localData.urls.raw + "&w=1500&dpr=2" : DEFAULT_BACKGROUND;
+            img.src = localData ? localData.urls.raw + "&w=1500&dpr=2" : DEFAULT_BACKGROUND.urls.raw + "&w=1500&dpr=2";
             img.onload = () => {
-                setCurrentImage(localData);
+                if(!localData) {
+                    setCurrentImage(DEFAULT_BACKGROUND)
+                } else {
+                    setCurrentImage(localData);
+                }
                 resolve()
             }
         })
