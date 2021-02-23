@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useGlobalAuth } from '../../../context/global-context';
 import QuoteService from "../../../services/quote-service";
 
-const Quotes = () => {
+function Quotes() {
     const {quoteData, loaded} = useGlobalAuth();
     const [quote, setQuote] = useState("")
 
@@ -24,12 +24,17 @@ const Quotes = () => {
                 .then(res => {
                     const date = new Date();
                     const randomItem = Math.floor(Math.random()*res.length);
-                    setQuote(res[randomItem])
+                    const newQuote = res[randomItem];
+                    if(newQuote.author === null || newQuote.author === "null") {
+                        fetchQuote();
+                        return;
+                    }
+                    setQuote(newQuote)
                     
                     //update local storage
                     const updatedData = {
                         ...localData,
-                        quote: res[randomItem],
+                        quote: newQuote,
                         date: date.getDay()
                     }
                     localStorage.setItem("quotes", JSON.stringify(updatedData));

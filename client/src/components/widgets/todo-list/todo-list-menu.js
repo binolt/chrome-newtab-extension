@@ -3,7 +3,7 @@ import { useAuth } from '../../../context/menu-context';
 import Toggle from "react-toggle";
 import { useGlobalAuth } from '../../../context/global-context';
 
-const TodoListMenu = () => {
+function TodoListMenu () {
     const {todoData, setTodoData} = useGlobalAuth();
     const {menu} = useAuth();
 
