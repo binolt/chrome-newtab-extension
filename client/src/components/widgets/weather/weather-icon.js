@@ -1,6 +1,6 @@
 import React, {useRef, useState, useEffect} from 'react';
 
-const WeatherIcon = ({name}) => {
+function WeatherIcon({name}) {
     const ImportedIconRef = useRef(null);
     const [loading, setLoading] = useState(false);
   

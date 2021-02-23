@@ -2,30 +2,23 @@
     position: absolute;
     top: 3rem;
     right: 3rem;
-    box-sizing: border-box;
-    cursor: pointer;
-    font-size: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: .75rem 1.25rem;
-    border-radius: 10px;
-    background: rgba(31, 33, 39, 0.01);
-    box-shadow: 0 5px 35px 0 rgba(15, 15, 15, 0.25);
-    backdrop-filter: blur( 20px );
     span {
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         margin-bottom: .25rem;
     }
     p  {
-        font-size: .72em;
+        font-size: .7em;
         font-weight: 300;
         margin-top: -.25rem;
         text-shadow: 1px 2px 3px #00000044;
     }
     svg {
         width: 40px;
+        height: 40px;
         margin-right: .5rem;
         fill: #fff;
     }
@@ -33,8 +26,7 @@
         text-shadow: 1px 2px 5px #00000042;
         font-weight: 300;
         color: #fff;
-        font-size: 1.5em;
-        margin-top: -.25rem;
+        font-size: 1.4em;
     }
 }
 
