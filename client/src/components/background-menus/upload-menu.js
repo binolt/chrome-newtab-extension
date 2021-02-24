@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import {useDropzone} from "react-dropzone";
 
 import {ReactComponent as ImageIcon} from "../../icons/settings/image-black-48dp.svg"
-import {ReactComponent as UploadIcon} from "../../icons/file_upload-black-48dp.svg";
+// import {ReactComponent as UploadIcon} from "../../icons/file_upload-black-48dp.svg";
 import { useGlobalAuth } from '../../context/global-context';
 
 
 const UploadMenu = () => {
   const [tempImage, setTempImage] = useState("");
   const [tempFile, setTempFile] = useState("");
-  const [imageDimensions, setImageDimensions] = useState()
+  // const [imageDimensions, setImageDimensions] = useState()
 
   const {setBackgroundImage} = useGlobalAuth();
 
@@ -18,19 +18,19 @@ const UploadMenu = () => {
     const reader = new FileReader();
     reader.addEventListener("load", function () {
       setTempImage(this.result)
-      calcDimensions(this.result);
+      // calcDimensions(this.result);
     });
     reader.readAsDataURL(file);
     setTempFile(file);
   }
   
-  const calcDimensions = (url) => {
-    const img = new Image();
-    img.src = url;
-    img.onload = function() {
-      setImageDimensions({width: this.width, height: this.height})
-    }
-  }
+  // const calcDimensions = (url) => {
+  //   const img = new Image();
+  //   img.src = url;
+  //   img.onload = function() {
+  //     setImageDimensions({width: this.width, height: this.height})
+  //   }
+  // }
 
   const handleCancel = () => {
     setTempFile("");

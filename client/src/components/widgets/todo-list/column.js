@@ -3,50 +3,36 @@ import Task from "./task";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import { ReactComponent as PlusIcon } from "../../../icons/add-black-24dp.svg"
 import { v4 as uuidv4 } from "uuid";
-
-const InnerList = React.memo((props, nextProps) => {
-  if (nextProps.tasks === props.tasks) {
-    return false;
-  } else {
-    return props.tasks.map((task, index) => (
-      <Task
-        key={task.id}
-        task={task}
-        index={index}
-        column={props.column}
-        deleteTask={props.deleteTask}
-        updateTask={props.updateTask}
-      />
-    ));
-  }
-});
-
-const handleNewTask = (props) => {
-  const { tasks, column, createNewTask } = props;
-  //add new task
-  const newTask = {
-    id: uuidv4(),
-    content: "Hello",
-    isNew: true,
-  };
-
-  //update tasks with new task
-  const updatedTasks = Array.from(tasks);
-  updatedTasks.push(newTask);
-
-  //update column taskids with new task id
-  const newTaskIdsArray = Array.from(column.taskIds);
-  newTaskIdsArray.push(newTask.id);
-
-  const updatedColumn = {
-    ...column,
-    taskIds: newTaskIdsArray,
-  };
-
-  createNewTask(updatedColumn, newTask);
-};
+import { useTodoAuth } from "../../../context/todo-context";
 
 const Column = (props) => {
+  const {createNewTask} = useTodoAuth();
+
+  const handleNewTask = (props) => {
+    const { tasks, column } = props;
+    //add new task
+    const newTask = {
+      id: uuidv4(),
+      content: "",
+      isNew: true,
+    };
+  
+    //update tasks with new task
+    const updatedTasks = Array.from(tasks);
+    updatedTasks.push(newTask);
+  
+    //update column taskids with new task id
+    const newTaskIdsArray = Array.from(column.taskIds);
+    newTaskIdsArray.push(newTask.id);
+  
+    const updatedColumn = {
+      ...column,
+      taskIds: newTaskIdsArray,
+    };
+  
+    createNewTask(updatedColumn, newTask);
+  };
+
   return (
     <Draggable draggableId={props.column.id} index={props.index}>
       {(provided) => (
@@ -75,8 +61,6 @@ const Column = (props) => {
                 <InnerList
                   tasks={props.tasks}
                   column={props.column}
-                  deleteTask={props.deleteTask}
-                  updateTask={props.updateTask}
                   />
                 {provided.placeholder}
               </div>
@@ -94,5 +78,20 @@ const Column = (props) => {
     </Draggable>
   );
 };
+
+const InnerList = React.memo((props, nextProps) => {  
+  if (nextProps.tasks === props.tasks) {
+    return false;
+  } else {
+    return props.tasks.map((task, index) => (
+      <Task
+        key={task.id}
+        task={task}
+        index={index}
+        column={props.column}
+      />
+    ));
+  }
+});
 
 export default Column;

@@ -12,6 +12,7 @@ import Quotes from './widgets/quotes/quotes';
 
 //ICONS
 import {ReactComponent as MenuIcon} from "../icons/menu-black-24dp.svg"; 
+import { TodoProvider } from '../context/todo-context';
 // import {ReactComponent as Search} from "../icons/search-black-24dp.svg" 
 // import {ReactComponent as Google} from "../icons/google-icon.svg" 
 
@@ -61,7 +62,9 @@ const Landing = () => {
         </div> */}
         {/* WIDGETS */}
         <Weather/>
-        <Board/>
+        <TodoProvider>
+          <Board/>
+        </TodoProvider>
         <div className="content-menu-placeholder" onClick={openModal}>
           <MenuIcon/>
         </div>

@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
-import { CSSTransition } from "react-transition-group";
 import TextareaAutosize from "react-textarea-autosize";
+import { useTodoAuth } from "../../../context/todo-context";
+import TaskTransitionContainer from "./task-transition-wrapper";
 
 
 //FUNCTIONS
@@ -14,33 +15,42 @@ import { ReactComponent as EditIcon } from "../../../icons/menu-black-24dp.svg";
 import { ReactComponent as TrashIcon } from "../../../icons/menu-black-24dp.svg";
 import { ReactComponent as CopyIcon } from "../../../icons/menu-black-24dp.svg";
 
-const Task = (props) => {
+function Task({task, index, column}) {
+  //global todo state
+  const {updateTask, deleteTask} = useTodoAuth();
+
+  //local state
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isEditing, setIsEditing] = useState(props.task.isNew);
-  const [currentValue, setCurrentValue] = useState("");
+  const [isEditing, setIsEditing] = useState(task.isNew);
+  const [currentValue, setCurrentValue] = useState(task.content);
+
+  //refs / functions
   const enterPress = useKeyPress("Enter");
   const menuRef = useRef();
   const textareaRef = useRef();
+  useOnClickOutside(menuRef, () => setMenuOpen(false));
+  useOnClickOutside(textareaRef, () => handleUpdate());
+
 
   useEffect(() => {
     //focus textarea
     isEditing && textareaRef.current.focus();
   }, [isEditing]);
 
-  useOnClickOutside(menuRef, () => setMenuOpen(false));
-  useOnClickOutside(textareaRef, () => updateTask());
 
-  const updateTask = () => {
-    setIsEditing(false);
-    const updatedTask = {
-      ...props.task,
-      updatedContent: currentValue,
-    };
-    props.updateTask(updatedTask);
+  const handleUpdate = () => {
+    if(isEditing) {
+      setIsEditing(false);
+      const updatedTask = {
+        ...task,
+        updatedContent: currentValue,
+      };
+      updateTask(updatedTask);
+    }
   };
 
   const handleTextareaChange = (evt) => {
-    enterPress && updateTask();
+    enterPress && handleUpdate();
     setCurrentValue(evt.target.value);
   };
 
@@ -49,14 +59,18 @@ const Task = (props) => {
   };
 
   const handleDelete = () => {
-    const { column, task, index } = props;
-    props.deleteTask(column, task.id, index);
+    deleteTask(column, task.id, index);
   };
+
+  const handleEdit = () => {
+    console.log("editing")
+    setIsEditing(true)
+  }
 
   const TaskMenu = () => {
     return (
-      <div className="task-menu-container" ref={menuRef}>
-        <span>
+      <div ref={menuRef}>
+        <span onClick={handleEdit}>
           <EditIcon />
           <p>Edit</p>
         </span>
@@ -74,9 +88,9 @@ const Task = (props) => {
 
   return (
     <Draggable
-      draggableId={props.task.id}
-      index={props.index}
-      isDragDisabled={menuOpen || props.task.isNew}
+      draggableId={task.id}
+      index={index}
+      isDragDisabled={menuOpen || task.isNew}
     >
       {(provided, snapshot) => (
         <div
@@ -85,6 +99,7 @@ const Task = (props) => {
           {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
+
           {isEditing ? (
             <TextareaAutosize
               onChange={handleTextareaChange}
@@ -92,20 +107,22 @@ const Task = (props) => {
               className="task-input"
               placeholder="Start Typing..."
               wrap="hard"
+              value={currentValue}
             />
           ) : (
-            <p>{props.task.content}</p>
+            <p>{task.content}</p>
           )}
 
-          <MenuIcon onClick={handleMenu} className="task-menu-icon" />
-          <CSSTransition
-            in={menuOpen}
-            timeout={500}
-            unmountOnExit
-            classNames="task-menu-primary"
-          >
-            <TaskMenu />
-          </CSSTransition>
+
+          {/* MENU */}
+          <div className="task-menu-icon">
+            <MenuIcon onClick={handleMenu} className="task-menu-icon" />
+          </div>
+          
+          <TaskTransitionContainer timeout={350} open={menuOpen} classNames="task-menu-primary">
+            <TaskMenu/>
+          </TaskTransitionContainer>
+
         </div>
       )}
     </Draggable>

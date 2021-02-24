@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useAuth } from '../../../context/menu-context';
 import Toggle from "react-toggle";
 import { useGlobalAuth } from '../../../context/global-context';

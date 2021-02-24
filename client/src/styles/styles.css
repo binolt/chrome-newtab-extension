@@ -877,135 +877,119 @@
 
 .task-container {
   position: relative;
-  outline: none;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  padding: 8px;
-  color: #fff;
+  min-height: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   margin-bottom: .5rem;
+  padding: .5rem;
+  border-radius: 5px;
+  overflow-wrap: break-word;
   border-radius: 5px;
   border: 1px solid rgba(43, 43, 43, 0.233);
   background: rgba(0, 0, 0, 0.45);
   -webkit-box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.25);
           box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.25);
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  position: relative;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  min-height: 20px;
 }
 
-.task-container:hover .task-menu-icon {
-  fill: #6b7c8f;
-}
-
-.task-container p {
-  width: 90%;
-  font-size: 0.7em;
+.task-container p, .task-container textarea {
+  font-size: .7em;
+  word-wrap: break-word;
   overflow-wrap: break-word;
+  width: 85%;
+  color: #fff;
+  z-index: 1;
 }
 
-.task-container .task-menu-icon {
-  cursor: pointer;
-  -webkit-transition: all 0.35s ease;
-  transition: all 0.35s ease;
-  position: absolute;
-  right: 2px;
-  fill: transparent;
-  width: 22px;
-  height: 22px;
-}
-
-.task-menu-container {
-  z-index: 2;
-  border: 1px solid #394758;
-  background-color: #3a465c;
-  border-radius: 5px;
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  padding-bottom: .5rem;
-  height: 69px;
-  overflow: hidden;
-  -webkit-box-shadow: 0px 3px 5px 2px rgba(0, 0, 0, 0.15);
-          box-shadow: 0px 3px 5px 2px rgba(0, 0, 0, 0.15);
-}
-
-.task-menu-container span {
-  padding: 4px 5px;
-  width: 100%;
-  width: 60px;
-  font-size: 0.885em;
-  margin-bottom: 1px;
-  border-bottom: 1px solid #2d3947;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  font-weight: 400;
-  cursor: pointer;
-  -webkit-transition: background 0.35s ease;
-  transition: background 0.35s ease;
-}
-
-.task-menu-container span:hover {
-  background: #516180;
-}
-
-.task-menu-container span:nth-child(3) {
-  border-bottom: none;
-}
-
-.task-menu-container svg {
-  fill: #fff;
-  width: 16px;
-  height: 16px;
-  margin-right: 3px;
-  padding-left: 2px;
-}
-
-.task-input {
-  width: 80%;
+.task-container textarea {
   background: transparent;
   color: #fff;
   outline: none;
   border: none;
-  font-size: 0.7em;
   overflow: auto;
   resize: none;
-  width: 164px;
   padding: 0;
-  word-wrap: break-word;
+}
+
+.task-container textarea::-webkit-input-placeholder {
+  color: #fff;
+}
+
+.task-container textarea:-ms-input-placeholder {
+  color: #fff;
+}
+
+.task-container textarea::-ms-input-placeholder {
+  color: #fff;
+}
+
+.task-container textarea::placeholder {
+  color: #fff;
+}
+
+.task-menu-icon {
+  width: 15%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.task-menu-icon svg {
+  height: 20px;
+  width: 20px;
+  fill: #fff;
+}
+
+.task-menu-container {
+  background: green;
+  position: absolute;
+  border-radius: 5px;
+  padding: .25rem;
+  z-index: 2;
+  top: .25rem;
+  right: .25rem;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.task-menu-container span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
 }
 
 .task-menu-primary-enter {
   position: absolute;
-  height: 0px;
+  z-index: 100;
+  opacity: 0;
 }
 
 .task-menu-primary-enter-active {
-  height: 69px;
-  -webkit-transition: all 500ms ease;
-  transition: all 500ms ease;
+  opacity: 1;
+  -webkit-transition: all 350ms ease;
+  transition: all 350ms ease;
 }
 
 .task-menu-primary-exit {
   position: absolute;
-  -webkit-transition: all 500ms ease;
-  transition: all 500ms ease;
-  height: 69px;
+  -webkit-transition: all 350ms ease;
+  transition: all 350ms ease;
   opacity: 1;
+  z-index: 2;
 }
 
 .task-menu-primary-exit-active {
-  height: 0px;
   opacity: 0;
 }
 
